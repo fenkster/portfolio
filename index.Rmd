@@ -3,8 +3,8 @@ title: "compmusic"
 author: "fenk"
 date: "Spring 2021"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 ```{r}
 library(tidyverse)
