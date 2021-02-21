@@ -3,14 +3,37 @@ title: "compmusic"
 author: "fenk"
 date: "Spring 2021"
 output:
-  html_document: default
-  pdf_document: default
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    theme: flatly
 ---
 ```{r}
 library(tidyverse)
 library(spotifyr)
+library(compmus)
+library(plotly)
 ```
 
+### Introduction: West v.s. East Coast Hip-Hop
+My corpus consists of different playlists representing two different genres of hiphop; west coast and east coast rap. These styles of hiphop derive from the east vs west coast rivalry from the mid 1990s. The four playlists I have curated represent different eras' of west/east coast music. They will allow me to uncover the musicological differences in these styles. I have two playlists for both types of west and east coast hiphop. One from its native time period, the mid 1990s as well as from today. Comparing modern and old school east and west coast rap will hopefully result in interesting findings. The production and beats of each of these genre's differs and I hope my research will help produce some answers in a more a data orientated and technical sense.
+
+The playlists in question:
+
+East Coast:
+
+-I love my East Coast classics (https://open.spotify.com/playlist/37i9dQZF1DWYGxBNe4qojI?si=Vnk0_2JORM6iL9ZK687ohQ)
+
+-State of Mind (https://open.spotify.com/playlist/37i9dQZF1DX1YPTAhwehsC?si=qaVXWuBySnWcegc6X_q0ug)
+
+West Coast:
+
+-I love my West Coast classics (https://open.spotify.com/playlist/37i9dQZF1DX9sQDbOMReFI?si=vn1s69TjRxqx43Kc62lVxA)
+
+-Cali Fire (https://open.spotify.com/playlist/3X0Ds1IEYdG1DL0sxCuW6y?si=-G0PuulVTFGmY2oaP490Ag)
+
+East Coast hiphop carries a more aggressive sound, while West Coast hip-hop is more laid back. East Coast natives are Jay Z, Notorious BIG, Nas, Rakim, Run DMC, KRS One. West Coast hiphop is mainly for chilling out and partying. Notable artists include The Game, 2Pac Shakur, Snoop Dogg, Grandmaster Flash. The west coast scene also popularized g-funk, a fusion between hip-hop and funk music. Some artists might have elements that are more similar to one genre vs the other. It will be interesting to see who has influenced who? Whether this was identified mainly through vocals or production.
+
+### West vs East Coast 
 ```{r}
 west <- get_playlist_audio_features("", "37i9dQZF1DX9sQDbOMReFI")
 #west <- get_playlist_audio_features("", "6dv5FbNRVlQelteqnNDFTe")
@@ -21,6 +44,32 @@ west_new <- get_playlist_audio_features("", "3X0Ds1IEYdG1DL0sxCuW6y")
 east_new <- get_playlist_audio_features("", "37i9dQZF1DX1YPTAhwehsC")
 ```
 
+
+
+```{r}
+sprintf("East Coast Classics: %s. Its energy: %f",east$track.name[which.max(east$energy)],max(east$energy))
+sprintf("West Coast Classics: %s. Its energy: %f", west$track.name[which.max(west$energy)],max(west$energy))
+sprintf("East Coast Modern: %s. Its energy: %f",east_new$track.name[which.max(east_new$energy)],max(na.omit(east_new$energy)))
+sprintf("West Coast Modern: %s. Its energy: %f",west_new$track.name[which.max(west_new$energy)],max(west_new$energy))
+
+sprintf("East Coast Classics: %f",mean(east$energy))
+sprintf("West Coast Classics: %f", mean(west$energy))
+sprintf("East Coast Modern: %f", mean(na.omit(east_new$energy)))
+sprintf("West Coast Modern: %f",mean(west_new$energy))
+```
+```{r}
+sprintf("East Coast Classics: %s. Its loudness: %f",east$track.name[which.max(east$loudness)],max(east$loudness))
+sprintf("West Coast Classics: %s. Its loudness: %f", west$track.name[which.max(west$loudness)],max(west$loudness))
+sprintf("East Coast Modern: %s. Its loudness: %f",east_new$track.name[which.max(east_new$loudness)],max(na.omit(east_new$loudness)))
+sprintf("West Coast Modern: %s. Its loudness: %f",west_new$track.name[which.max(west_new$loudness)],max(west_new$loudness))
+
+sprintf("East Coast Classics: %f",mean(east$loudness))
+sprintf("West Coast Classics: %f", mean(west$loudness))
+sprintf("East Coast Modern: %f", mean(na.omit(east_new$loudness)))
+sprintf("West Coast Modern: %f",mean(west_new$loudness))
+```
+
+### Variables
 ```{r}
 west_summary <- west %>%
   summarise(
@@ -30,6 +79,7 @@ west_summary <- west %>%
     mean_energy = mean(energy),
     mean_acousticness = mean(acousticness),
   )
+west_summary
 ```
 
 ```{r}
@@ -41,8 +91,11 @@ east_summary <- east %>%
     mean_energy = mean(energy),
     mean_acousticness = mean(acousticness),
   )
+east_summary
 ```
 
+### ggplot histogram
+#### west v.s. east
 ```{r}
 together <-
   bind_rows(
@@ -61,6 +114,9 @@ west %>% ggplot(aes(x =valence)) + geom_histogram(binwidth = 0.05)
 east %>% ggplot(aes(x = valence)) + geom_histogram(binwidth = 0.05)
 ```
 
+### Comprehensive Visualisation
+#### Old School West & East Coast classics v.s. Modern West & East Coast music
+
 ```{r}
 together %>%                    
   mutate(
@@ -70,7 +126,7 @@ together %>%
     aes(
       x = valence,
       y = energy,
-      size = liveness,
+      size = loudness,
       colour = mode
     )
   ) + geom_point() +              # Scatter plot.
@@ -119,10 +175,28 @@ together %>%
     x = "Valence",
     y = "Energy",
     colour = "Mode",
-    size="Liveness"
+    size="Loudness"
   )
 ```
+
+***
+These charts displays four important metrics for each playlist in my corpus. We compare valence, energy, loudness and mode in this comprehensive visualization.
+
+### Modality comparison
+#### Old School West & East Coast classics v.s. Modern West & East Coast music
 
 ```{r}
 together %>% ggplot(aes(x = mode)) + geom_histogram(binwidth = 0.05)+facet_wrap(~category)
 ```
+
+> Mode indicates the modality (major or minor) of a track. Major is represented by 1 and minor is 0.
+
+***
+
+
+### Conclusion: Discussion of findings
+
+
+Blah blah
+
+***
