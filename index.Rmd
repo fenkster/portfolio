@@ -203,6 +203,11 @@ loudesteast <-
 ```
 
 ```{r}
+par(mfrow = c(2,1))
+```
+
+
+```{r}
 loudesteast %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
@@ -257,6 +262,10 @@ loudestwest <-
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
+```
+
+```{r}
+par(mfrow = c(2,1))
 ```
 
 ```{r}
