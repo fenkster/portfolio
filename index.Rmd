@@ -44,8 +44,8 @@ west_new <- get_playlist_audio_features("", "3X0Ds1IEYdG1DL0sxCuW6y")
 east_new <- get_playlist_audio_features("", "37i9dQZF1DX1YPTAhwehsC")
 ```
 
-
 > Energy
+
 ```{r}
 sprintf("East Coast Classics: %s. Its energy: %f",east$track.name[which.max(east$energy)],max(east$energy))
 sprintf("West Coast Classics: %s. Its energy: %f", west$track.name[which.max(west$energy)],max(west$energy))
@@ -57,13 +57,14 @@ sprintf("West Coast Classics: %f", mean(west$energy))
 sprintf("East Coast Modern: %f", mean(na.omit(east_new$energy)))
 sprintf("West Coast Modern: %f",mean(west_new$energy))
 ```
+
 > Loudness
+
 ```{r}
 sprintf("East Coast Classics: %s. Its loudness: %f",east$track.name[which.max(east$loudness)],max(east$loudness))
 sprintf("West Coast Classics: %s. Its loudness: %f", west$track.name[which.max(west$loudness)],max(west$loudness))
 sprintf("East Coast Modern: %s. Its loudness: %f",east_new$track.name[which.max(east_new$loudness)],max(na.omit(east_new$loudness)))
 sprintf("West Coast Modern: %s. Its loudness: %f",west_new$track.name[which.max(west_new$loudness)],max(west_new$loudness))
-
 sprintf("East Coast Classics: %f",mean(east$loudness))
 sprintf("West Coast Classics: %f", mean(west$loudness))
 sprintf("East Coast Modern: %f", mean(na.omit(east_new$loudness)))
@@ -218,10 +219,11 @@ loudesteast %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+> Knock Yourself Out - Jadakiss
 
 ```{r}
 loudesteast_new <-
-  get_tidy_audio_analysis("6eQHIFVNvgsg4ooRrzgwVz") %>%
+  get_tidy_audio_analysis("4VqFPmogUJw9NHBKxUKtiw") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
@@ -244,11 +246,12 @@ loudesteast_new %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+> Trust - Fivo Foreign
 
 ### Loudest Songs from the West Coast
 ```{r}
 loudestwest <-
-  get_tidy_audio_analysis("3ssX20QT5c3nA9wk78V1LQ") %>%
+  get_tidy_audio_analysis("5a251qN4R86hro8UZGuO4E") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
@@ -271,6 +274,7 @@ loudestwest %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+> The Streets, Re-Twist - WC, Snoop Dogg, Nate Dogg
 
 ```{r}
 loudestwest_new <-
@@ -297,6 +301,9 @@ loudestwest_new %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+
+> Children of the Void - Ramirez, SosMula
+
 ### Conclusion: Discussion of findings
 
 
