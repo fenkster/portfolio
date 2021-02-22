@@ -45,7 +45,7 @@ east_new <- get_playlist_audio_features("", "37i9dQZF1DX1YPTAhwehsC")
 ```
 
 
-
+> Energy
 ```{r}
 sprintf("East Coast Classics: %s. Its energy: %f",east$track.name[which.max(east$energy)],max(east$energy))
 sprintf("West Coast Classics: %s. Its energy: %f", west$track.name[which.max(west$energy)],max(west$energy))
@@ -57,6 +57,7 @@ sprintf("West Coast Classics: %f", mean(west$energy))
 sprintf("East Coast Modern: %f", mean(na.omit(east_new$energy)))
 sprintf("West Coast Modern: %f",mean(west_new$energy))
 ```
+> Loudness
 ```{r}
 sprintf("East Coast Classics: %s. Its loudness: %f",east$track.name[which.max(east$loudness)],max(east$loudness))
 sprintf("West Coast Classics: %s. Its loudness: %f", west$track.name[which.max(west$loudness)],max(west$loudness))
@@ -191,9 +192,111 @@ together %>% ggplot(aes(x = mode)) + geom_histogram(binwidth = 0.05)+facet_wrap(
 
 > Mode indicates the modality (major or minor) of a track. Major is represented by 1 and minor is 0.
 
-***
+### Loudest Songs from the East Coast
+```{r}
+loudesteast <-
+  get_tidy_audio_analysis("4jCio4LNO1eZbl09ed4ZFn") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+```
 
+```{r}
+loudesteast %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
 
+```{r}
+loudesteast_new <-
+  get_tidy_audio_analysis("6eQHIFVNvgsg4ooRrzgwVz") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+```
+
+```{r}
+loudesteast_new %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+### Loudest Songs from the West Coast
+```{r}
+loudestwest <-
+  get_tidy_audio_analysis("3ssX20QT5c3nA9wk78V1LQ") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+```
+
+```{r}
+loudestwest %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+```{r}
+loudestwest_new <-
+  get_tidy_audio_analysis("3yh3vAhcfQQfOmqSq6SEJj") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+```
+
+```{r}
+loudestwest_new %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
 ### Conclusion: Discussion of findings
 
 
