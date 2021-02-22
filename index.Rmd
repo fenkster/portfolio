@@ -193,7 +193,7 @@ together %>% ggplot(aes(x = mode)) + geom_histogram(binwidth = 0.05)+facet_wrap(
 
 > Mode indicates the modality (major or minor) of a track. Major is represented by 1 and minor is 0.
 
-### Loudest Songs from the East Coast
+### Loudest Song from the East Coast classics playlist
 ```{r}
 loudesteast <-
   get_tidy_audio_analysis("4jCio4LNO1eZbl09ed4ZFn") %>%
@@ -227,6 +227,7 @@ loudesteast %>%
 
 > Knock Yourself Out - Jadakiss
 
+### Loudest Song from the Modern East Coast playlist
 ```{r}
 loudesteast_new <-
   get_tidy_audio_analysis("4VqFPmogUJw9NHBKxUKtiw") %>%
@@ -255,7 +256,7 @@ loudesteast_new %>%
 
 > Trust - Fivo Foreign
 
-### Loudest Songs from the West Coast
+### Loudest Song from the West Coast classics playlist
 ```{r}
 loudestwest <-
   get_tidy_audio_analysis("5a251qN4R86hro8UZGuO4E") %>%
@@ -288,6 +289,7 @@ loudestwest %>%
 
 > The Streets, Re-Twist - WC, Snoop Dogg, Nate Dogg
 
+### Loudest Song from the Modern West Coast playlist
 ```{r}
 loudestwest_new <-
   get_tidy_audio_analysis("3yh3vAhcfQQfOmqSq6SEJj") %>%
