@@ -219,6 +219,7 @@ loudesteast %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+
 > Knock Yourself Out - Jadakiss
 
 ```{r}
@@ -246,6 +247,7 @@ loudesteast_new %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+
 > Trust - Fivo Foreign
 
 ### Loudest Songs from the West Coast
@@ -274,6 +276,7 @@ loudestwest %>%
   theme_minimal() +
   scale_fill_viridis_c()
 ```
+
 > The Streets, Re-Twist - WC, Snoop Dogg, Nate Dogg
 
 ```{r}
