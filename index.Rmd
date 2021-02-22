@@ -112,9 +112,13 @@ together <-
 west %>% ggplot(aes(x =valence)) + geom_histogram(binwidth = 0.05)
 ```
 
+> West Coast
+
 ```{r}
 east %>% ggplot(aes(x = valence)) + geom_histogram(binwidth = 0.05)
 ```
+
+> East Coast
 
 ### Comprehensive Visualisation
 #### Old School West & East Coast classics v.s. Modern West & East Coast music
