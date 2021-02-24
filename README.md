@@ -1,4 +1,5 @@
 # portfolio
+## PLEASE DO NOT SHOW IN CLASS
 
 My corpus consists of different playlists representing two different genres of hiphop; west coast and east coast rap. These styles of hiphop derive from the east vs west coast rivalry from the mid 1990s. The four playlists I have curated represent different eras' of west/east coast music. They will allow me to uncover the musicological differences in these styles. I have two playlists for both types of west and east coast hiphop. One from its native time period, the mid 1990s as well as from today. Comparing modern and old school east and west coast rap will hopefully result in interesting findings. The production and beats of each of these genre's differs and I hope my research will help produce some answers in a more a data orientated and technical sense.
 
