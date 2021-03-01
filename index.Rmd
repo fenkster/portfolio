@@ -14,7 +14,7 @@ library(compmus)
 library(plotly)
 ```
 
-### Representation of the Chroma and Timbre features for the song "Insane in the Brain - Cypress Hill"
+### Representation of the Chroma- and Timbre features for the song "Insane in the Brain - Cypress Hill"
 
 ```{r}
 insane <-
