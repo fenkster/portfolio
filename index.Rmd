@@ -14,6 +14,59 @@ library(compmus)
 library(plotly)
 ```
 
+### Representation of the Chroma and Timbre features for the song "Insane in the Brain - Cypress Hill"
+
+```{r}
+insane <-
+  get_tidy_audio_analysis("1oTHteQbmJw15rPxPVXUTv") %>%
+  compmus_align(bars, segments) %>%
+  select(bars) %>%
+  unnest(bars) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "acentre", norm = "manhattan"
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "mean"
+      )
+  )
+bind_rows(
+  insane %>% 
+    compmus_self_similarity(pitches, "aitchison") %>% 
+    mutate(d = d / max(d), type = "Chroma"),
+  insane %>% 
+    compmus_self_similarity(timbre, "euclidean") %>% 
+    mutate(d = d / max(d), type = "Timbre")
+) %>%
+  mutate() %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  facet_wrap(~type) +
+  scale_fill_viridis_c(option = "E", guide = "none") +
+  theme_classic() + 
+  labs(x = "", y = "")
+```
+
+
+***
+This chroma and timbre based self-similarty matrix represents the pitch and timbres' structure for the song "Insane in the Brain by the notorious West Coast rap collective Cypress Hill. The chroma and timbre matrices differ greatly in terms of structure. Only the start and end of the song seem to have some similarities. The square boxes visible in both matrices are positioned in different places. No clear structure can be seen in both figures.
+
+
 ### Introduction: West v.s. East Coast Hip-Hop
 My corpus consists of different playlists representing two different genres of hiphop; west coast and east coast rap. These styles of hiphop derive from the east vs west coast rivalry from the mid 1990s. The four playlists I have curated represent different eras' of west/east coast music. They will allow me to uncover the musicological differences in these styles. I have two playlists for both types of west and east coast hiphop. One from its native time period, the mid 1990s as well as from today. Comparing modern and old school east and west coast rap will hopefully result in interesting findings. The production and beats of each of these genre's differs and I hope my research will help produce some answers in a more a data orientated and technical sense.
 
