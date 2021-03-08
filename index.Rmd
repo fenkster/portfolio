@@ -99,7 +99,8 @@ key_templates <-
 ```
 
 
-### Chordogram
+### Chordogram comparison of two old school hip-hop songs from the same year (1995) with different style!
+(Gangsta's Paradise v.s. Shook Ones Pt. II)
 
 
 #### Gangsta's Paradise - Coolio
@@ -151,7 +152,7 @@ get_tidy_audio_analysis("33ZXjLCpiINn8eQIDYEPTD") %>%
 ```
 
 
-Comparison of east-coast old school hiphop song *Shook Ones Pt. II* by Mobb Deep with old school west-coast hiphop song *Gangsta's Paradise* from Coolio. The songs have a different style as they are from opposite side's of the country but both are from 1995 and some similarities can be found in their structure.
+Comparison of east-coast old school hiphop song *Shook Ones Pt. II* by Mobb Deep with old school west-coast hiphop song *Gangsta's Paradise* from Coolio. The songs have a different style as they are from opposite side's of the country but both are from 1995 and some similarities can be found in their structure. The chordograms both represent stronger intensity with the darklines on B:7, E:7, C#:min, Eb:7 and Bb:7.
 
 
 
