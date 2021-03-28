@@ -34,19 +34,19 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 
 **East Coast:** *Where it all started.*
 
-- I Love My East Coast Classics (https://open.spotify.com/playlist/37i9dQZF1DWYGxBNe4qojI?si=Vnk0_2JORM6iL9ZK687ohQ)
+- I Love My East Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DWYGxBNe4qojI?si=Vnk0_2JORM6iL9ZK687ohQ)
 
-- State of Mind (https://open.spotify.com/playlist/37i9dQZF1DX1YPTAhwehsC?si=qaVXWuBySnWcegc6X_q0ug)
+- State of Mind: (https://open.spotify.com/playlist/37i9dQZF1DX1YPTAhwehsC?si=qaVXWuBySnWcegc6X_q0ug)
 
 **West Coast:** *The best side!*
 
-- I Love My West Coast Classics (https://open.spotify.com/playlist/37i9dQZF1DX9sQDbOMReFI?si=vn1s69TjRxqx43Kc62lVxA)
+- I Love My West Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DX9sQDbOMReFI?si=vn1s69TjRxqx43Kc62lVxA)
 
-- Cali Fire (https://open.spotify.com/playlist/3X0Ds1IEYdG1DL0sxCuW6y?si=-G0PuulVTFGmY2oaP490Ag)
+- Cali Fire: (https://open.spotify.com/playlist/3X0Ds1IEYdG1DL0sxCuW6y?si=-G0PuulVTFGmY2oaP490Ag)
 
-**Southern:** *The South got something to say*
+**Southern:** *The South got something to say.*
 
-- I Love My South Coast Classics (https://open.spotify.com/playlist/37i9dQZF1DWYok9l1JL7GM?si=y5v7D453SI-IeLxqJyHM4w)
+- I Love My South Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DWYok9l1JL7GM?si=y5v7D453SI-IeLxqJyHM4w)
 
 
 
@@ -814,11 +814,10 @@ Conclusion
 =========================================
 ### Conclusion: Discussion of findings
 
+This analysis has enabled me to compare two styles and two generations of hip-hop (90s and today) highlighting the  features and variables that have evolved over time. Hip-hop culture today is much different than in the 80s and 90s with artists gaining access to quick distribution, cheap production and easy online traction. The music industry landscape has changed drastically boosting the Hip-Hop genre to dominate chart positions all over the world.
 ```{=html}
 <object data="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140">
     <embed src="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140"></embed>
 </object>
 ```
-Blah blah
-
 ***
