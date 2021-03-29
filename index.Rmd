@@ -192,9 +192,10 @@ Valence is higher for the "classic" playlists, this trend is clear with the West
 Energy is highest in the Southern Classics playlist, this makes sense to me due to the very distinct production present in Southern American hip-hop. 
 
 **Acousticness**
-Surprisingly enough acousticness seems to be stronger in the modern playlists. The weak nature or lack of acousticness in the old school playlists could be due to the presence of electronic music during the era of old school hip-hop.
+Surprisingly enough acousticness seems to be stronger in the modern playlists. The weak nature or lack of acousticness in the old school playlists could be due to the novel presence of electronic music during the era of old school hip-hop. Tracks contained a lot more electric instruments such as electric synthesizers, guitars and drums. Modern hip-hop tends to be more acoustic with more use of instruments and human vocals.
 
 **Speechiness**
+
 
 **Tempo**
 
@@ -400,7 +401,7 @@ fig<-songs_old_data %>%
 ggplotly(fig)
 ```
 ***
-The first thing to point out is that Loungin is a lot shorter. As for the pithce: in Loungin higher pitches are more prevalent and in Fuck Tha Police there's more lower pitches.
+The first thing to point out is that **Loungin** is a lot shorter. As for the pitch: in **Loungin** higher pitches are more prevalent and in **Fuck Tha Police** there's more lower pitches.
 
 ### Pitch Analysis Modern
 
@@ -425,7 +426,7 @@ fig<-songs_new_data %>%
 ggplotly(fig)
 ```
 ***
-Again, the East song is shorter and middle pitches are more prevalent. The west song has a lot of low pitches.
+Again, the East coast song is shorter and middle pitches are more prevalent. The west coast song has a lot of low pitches.
 
 ### Chord and Key Comparison of two old school hip-hop songs
 
@@ -659,7 +660,7 @@ east_song_key %>%
 
 
 ***
-The Chords look fairly similar between coasts. The keys are very different. The East song is mainly in minor keys, except for one moment around 90 seconds. The West song has more diversity in keys.
+The Chords look fairly similar between coasts. The keys are very different. The East coast song is mainly in minor keys, except for one moment around 90 seconds. The West coast song has more diversity in keys.
 
 ### Chord and Key Comparison Modern
 
@@ -790,7 +791,7 @@ east_new_song_key %>%
 
 
 ***
-The Modern songs are more different between coasts.The West coast song has two periods where there's more intensity in both Chords and Keys, while for the East song things only happen in the very beginning.
+The Modern songs are more different between coasts.The West coast song has two periods where there's more intensity in both Chords and Keys, while for the East coast song things only happen in the very beginning.
 
 ### Tempo Novelty
 
