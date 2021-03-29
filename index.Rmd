@@ -189,8 +189,10 @@ All the means are quite close to each other but the Southern playlist leans towa
 Valence is higher for the "classic" playlists, this trend is clear with the West Coast, East Coast and Southern Classic playlists. Songs during the classical period of Hip-Hop tended to be a lot more optimistic. Today rap is a lot more depressing.
 
 **Energy**
+Energy is highest in the Southern Classics playlist, this makes sense to me due to the very distinct production present in Southern American hip-hop. 
 
 **Acousticness**
+Surprisingly enough acousticness seems to be stronger in the modern playlists. The weak nature or lack of acousticness in the old school playlists could be due to the presence of electronic music during the era of old school hip-hop.
 
 **Speechiness**
 
@@ -324,13 +326,13 @@ west_new<-get_most_average_song(west_new)[[1]]
 west_new_song_name<-get_most_average_song(west_new)[[2]]
 ```
 
-The most average song from I love My West Coast Classics is `r west_song_name`.
+The most average song from *I love My West Coast Classics* is **`r west_song_name`.**
 
-The most average song from I Love My East Coast Classics is `r east_song_name`.
+The most average song from *I Love My East Coast Classics* is **`r east_song_name`.**
 
-The most average song from Cali Fire is `r west_new_song_name`.
+The most average song from *Cali Fire* is **`r west_new_song_name`.**
 
-The most average song from State of Mind is `r east_new_song_name`.
+The most average song from *State of Mind* is **`r east_new_song_name`.**
 
 ***
 The function calculates the sum of absolute distances between each feature of the songs in the playlist and the feature's mean. The songs with the minimum difference are chosen to be the 'most average'.
