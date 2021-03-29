@@ -4,6 +4,8 @@ author: "Maximilien Fenk"
 date: "Spring 2021"
 output:
   flexdashboard::flex_dashboard:
+    #vertical_layout: fill
+    #orientation: columns
     #storyboard: true
     theme: cosmo
 ---
@@ -16,6 +18,7 @@ library(plotly)
 library(tidymodels)
 library(ggdendro)
 library(heatmaply)
+library(knitr)
 
 #access_token <- get_spotify_access_token()
 ```
@@ -23,7 +26,7 @@ library(heatmaply)
 Introduction
 =========================================
 
-### Each v.s. West Coast Hip-Hop
+### West v.s. East Coast Hip-Hop
 
 The **West Coast - East Coast Hip-Hop** rivalry stems from the mid-1990s. This feud exploded in popularity during the emergence of iconic rappers The Notorious B.I.G. from New York, and Tupac Shakur in Los Angeles. Artists such as these would regularly release diss tracks, calling each other out in epic rap battles. As this rivalry grew, each of the coast’s started creating their own distinctive sound to distance themselves from each other. The focal point of this project is to compare how these styles differed both during the “Golden Age of Hip-Hop” and today. 
 
@@ -49,52 +52,18 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 - I Love My South Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DWYok9l1JL7GM?si=y5v7D453SI-IeLxqJyHM4w)
 
 
-
 Analysis {.storyboard}
 =========================================
 
 ```{r}
 west <- get_playlist_audio_features("", "37i9dQZF1DX9sQDbOMReFI")
-#west <- get_playlist_audio_features("", "6dv5FbNRVlQelteqnNDFTe")
-#east <- get_playlist_audio_features("", "67zYW4wCQezR6AH8EuNZ1Q")
 east <- get_playlist_audio_features("", "37i9dQZF1DWYGxBNe4qojI")
+
 south<- get_playlist_audio_features("","37i9dQZF1DWYok9l1JL7GM")
 
 west_new <- get_playlist_audio_features("", "3X0Ds1IEYdG1DL0sxCuW6y")
 east_new <- get_playlist_audio_features("", "37i9dQZF1DX1YPTAhwehsC")
 
-```
-
-### West vs East Coast
-
-> Energy
-
-```{r}
-#east_max_energy<-east$track.name[which.max(east$energy)],max(east$energy))
-sprintf("East Coast Classics: %s. Its energy: %f",east$track.name[which.max(east$energy)],max(east$energy))
-sprintf("West Coast Classics: %s. Its energy: %f", west$track.name[which.max(west$energy)],max(west$energy))
-sprintf("East Coast Modern: %s. Its energy: %f",east_new$track.name[which.max(east_new$energy)],max(na.omit(east_new$energy)))
-sprintf("West Coast Modern: %s. Its energy: %f",west_new$track.name[which.max(west_new$energy)],max(west_new$energy))
-
-sprintf("East Coast Classics: %f",mean(east$energy))
-sprintf("West Coast Classics: %f", mean(west$energy))
-sprintf("East Coast Modern: %f", mean(na.omit(east_new$energy)))
-sprintf("West Coast Modern: %f",mean(west_new$energy))
-```
-Some stats on energy
- East Coast Classics: `r east$track.name[which.max(east$energy)]`. Its energy:
-
-> Loudness
-
-```{r}
-sprintf("East Coast Classics: %s. Its loudness: %f",east$track.name[which.max(east$loudness)],max(east$loudness))
-sprintf("West Coast Classics: %s. Its loudness: %f", west$track.name[which.max(west$loudness)],max(west$loudness))
-sprintf("East Coast Modern: %s. Its loudness: %f",east_new$track.name[which.max(east_new$loudness)],max(na.omit(east_new$loudness)))
-sprintf("West Coast Modern: %s. Its loudness: %f",west_new$track.name[which.max(west_new$loudness)],max(west_new$loudness))
-sprintf("East Coast Classics: %f",mean(east$loudness))
-sprintf("West Coast Classics: %f", mean(west$loudness))
-sprintf("East Coast Modern: %f", mean(na.omit(east_new$loudness)))
-sprintf("West Coast Modern: %f",mean(west_new$loudness))
 ```
 
 ### Descriptive Statistics
@@ -108,9 +77,11 @@ west_summary <- west %>%
     mean_mode=mean(mode),
     mean_acousticness = mean(acousticness),
     mean_speechiness = mean(speechiness),
-    mean_tempo = mean(tempo)
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
   )
-west_summary
 ```
 
 ```{r}
@@ -122,9 +93,11 @@ east_summary <- east %>%
     mean_mode=mean(mode),
     mean_acousticness = mean(acousticness),
     mean_speechiness = mean(speechiness),
-    mean_tempo = mean(tempo)
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
   )
-east_summary
 ```
 
 ```{r}
@@ -136,9 +109,11 @@ south_summary <- south %>%
     mean_mode=mean(mode),
     mean_acousticness = mean(acousticness),
     mean_speechiness = mean(speechiness),
-    mean_tempo = mean(tempo)
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
   )
-south_summary
 ```
 
 ```{r}
@@ -150,9 +125,11 @@ west_new_summary <- west_new %>%
     mean_mode=mean(mode),
     mean_acousticness = mean(acousticness),
     mean_speechiness = mean(speechiness),
-    mean_tempo = mean(tempo)
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
   )
-west_new_summary
 ```
 
 ```{r}
@@ -164,77 +141,73 @@ east_new_summary <- east_new %>%
     mean_mode=mean(mode),
     mean_acousticness = mean(acousticness),
     mean_speechiness = mean(speechiness),
-    mean_tempo = mean(tempo)
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
   )
-east_new_summary
 ```
 
 ```{r}
-get_most_average_song <- function(playlist) 
-{
-  
-  metrics<-c("danceability","energy","key","loudness","mode","speechiness",
-             "acousticness","instrumentalness","liveness","valence","tempo")
-  mean_metrics=colMeans(playlist[,metrics])
-  playlist$diff=rep(0,nrow(playlist))
-  
- for(i in 1:nrow(playlist)) {
-  playlist[i,'diff']<-sum(abs(playlist[i,metrics]-mean_metrics[metrics]))
- }
-  return (playlist)
-}
+south_summary <- south %>%
+  summarise(
+    mean_danceability = mean(danceability),
+    mean_valence = mean(valence),
+    mean_energy = mean(energy),
+    mean_mode=mean(mode),
+    mean_acousticness = mean(acousticness),
+    mean_speechiness = mean(speechiness),
+    mean_tempo = mean(tempo),
+    mean_instrumentalness = mean(instrumentalness),
+    mean_key=mean(key),
+    mean_liveness=mean(liveness)
+  )
 ```
 
 ```{r}
-east<-get_most_average_song(east)
-west<-get_most_average_song(west)
-east_new<-get_most_average_song(east_new)
-west_new<-get_most_average_song(west_new)
+all_stats <-
+  bind_rows(
+    west_summary %>% mutate(category = "West Coast Classics"),
+    east_summary %>% mutate(category = "East Coast Classics"),
+    west_new_summary %>% mutate(category = "West Coast Modern"),
+    east_new_summary %>% mutate(category = "East Coast Modern"),
+    south_summary %>% mutate(category = "South")
+  )
+
+kable(all_stats)
 ```
 
-### ggplot histogram
-#### west v.s. east
+Point out where you see the biggest differences.
+
+### Visualising the guesses
+
 ```{r}
 together <-
   bind_rows(
-    west %>% mutate(category = "West Coast Classics"),
-    east %>% mutate(category = "East Coast Classics"),
-    west_new %>% mutate(category = "West Coast Modern"),
-    east_new %>% mutate(category = "East Coast Modern")
+    west %>% mutate(playlist = "West Coast Classics"),
+    east %>% mutate(playlist = "East Coast Classics"),
+    west_new %>% mutate(playlist = "West Coast Modern"),
+    east_new %>% mutate(playlist = "East Coast Modern")
   )
 ```
 
 ```{r}
-west %>% ggplot(aes(x =valence)) + geom_histogram(binwidth = 0.05)
-```
-
-> West Coast
-
-```{r}
-east %>% ggplot(aes(x = valence)) + geom_histogram(binwidth = 0.05)
-```
-
-> East Coast
-
-### Comprehensive Visualisation
-#### Old School West & East Coast classics v.s. Modern West & East Coast music
-
-```{r}
-together %>%                    
+interactive<-together %>%                    
   mutate(
     mode = ifelse(mode == 0, "Minor", "Major")
   ) %>%
   ggplot(                     # Set up the plot.
     aes(
-      x = valence,
-      y = energy,
-      size = loudness,
+      label=track.name,
+      x = energy,
+      y = valence,
+      size = acousticness,
       colour = mode
     )
   ) + geom_point() +              # Scatter plot.
   #geom_rug(size = 0.1) +      # Add 'fringes' to show data distribution.
   # geom_text(                  # Add text labels from above.
-  #   aes(
+  #  aes(
   #     x = valence,
   #     y = energy,
   #     label = label
@@ -253,7 +226,7 @@ together %>%
   #   nudge_x = -0.05,          # Nudge the label slightly left.
   #   nudge_y = 0.02            # Nudge the label slightly up.
   # ) +
-  facet_wrap(~category) +     # Separate charts per playlist.
+  facet_wrap(~playlist) +     # Separate charts per playlist.
   scale_x_continuous(         # Fine-tune the x axis.
     limits = c(0, 1),
     breaks = c(0, 0.50, 1),   # Use grid-lines for quadrants only.
@@ -274,130 +247,118 @@ together %>%
   ) +
   theme_light() +             # Use a simpler theme.
   labs(                       # Make the titles nice.
-    x = "Valence",
-    y = "Energy",
+    x = "Energy",
+    y = "Valence",
     colour = "Mode",
-    size="Loudness"
+    size="Acousticness"
   )
+
+#ggplotly(interactive) #%>%
+  # layout(legend = list(
+  #     orientation = "h",
+  #     x = "auto",y="auto"))
+```
+
+```{r}
+ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5))
 ```
 
 ***
+
 These charts display four important metrics for each playlist in my corpus. We compare valence, energy, loudness and mode in this comprehensive visualization.
 
-### Modality comparison
-#### Old School West & East Coast classics v.s. Modern West & East Coast music
+need to fix the legend
 
-```{r}
-together %>% ggplot(aes(x = mode)) + geom_histogram(binwidth = 0.05)+facet_wrap(~category)
+
+### Most average songs
+```{r get_most_average_song, echo=TRUE}
+get_most_average_song <- function(playlist) 
+{
+  metrics<-c("danceability","energy","key","loudness","mode","speechiness",
+             "acousticness","instrumentalness","liveness","valence","tempo")
+  
+  mean_metrics=colMeans(playlist[,metrics])
+  playlist$diff=rep(0,nrow(playlist))
+  
+ for(i in 1:nrow(playlist)) {
+  playlist[i,'diff']<-sum(abs(playlist[i,metrics]-mean_metrics[metrics]))
+ }
+  song=playlist$track.name[which.min(playlist$diff)]
+  return (list(playlist,song))
+}
 ```
 
-> Mode indicates the modality (major or minor) of a track. Major is represented by 1 and minor is 0.
 
-### Pitch analysis
-#### Most average song from the West Coast Classics playlist
+```{r echo=TRUE}
+east<-get_most_average_song(east)[[1]]
+east_song_name<-get_most_average_song(east)[[2]]
+
+west<-get_most_average_song(west)[[1]]
+west_song_name<-get_most_average_song(west)[[2]]
+
+east_new<-get_most_average_song(east_new)[[1]]
+east_new_song_name<-get_most_average_song(east_new)[[2]]
+
+west_new<-get_most_average_song(west_new)[[1]]
+west_new_song_name<-get_most_average_song(west_new)[[2]]
+```
+
+The most average song from I love My West Coast Classics is `r west_song_name`.
+
+The most average song from I Love My East Coast Classics is `r east_song_name`.
+
+The most average song from Cali Fire is `r west_new_song_name`.
+
+The most average song from State of Mind is `r east_new_song_name`.
+
+***
+The function calculates the sum of absolute distances between each feature of the songs in the playlist and the feature's mean. The songs with the minimum difference are chosen to be the 'most average'.
+
+### Pitch Analysis Classics
+
 ```{r}
-west_song <-
+# Get songs
+west_song_data <-
   get_tidy_audio_analysis("5n8Aro6j1bEGIy7Tpo7FV7?") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-par(mfrow = c(2,1))
-```
-
-```{r}
-west_song %>%
-  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
-  compmus_gather_chroma() %>% 
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = pitch_class,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-  scale_fill_viridis_c()
-```
-
-> Song name
-
-#### Most average song from the East Coast Classics playlist
-```{r}
-east_song <-
+east_song_data <-
   get_tidy_audio_analysis("0UN5OvKlbg06LnZyVk48ll") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-par(mfrow = c(2,1))
-```
-
-```{r}
-east_song %>%
-  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
-  compmus_gather_chroma() %>% 
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = pitch_class,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-  scale_fill_viridis_c()
-```
-> song name
-
-#### Most average song from the West Coast Modern playlist
-```{r}
-west_new_song <-
+west_new_song_data <-
   get_tidy_audio_analysis("3r4wZRhYjAhqW4QjK9Z0sN") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-par(mfrow = c(2,1))
-```
-
-```{r}
-west_new_song %>%
-  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
-  compmus_gather_chroma() %>% 
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = pitch_class,
-      fill = value
-    )
-  ) +
-  geom_tile() +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_minimal() +
-  scale_fill_viridis_c()
-```
-> song name
-
-#### Most average song from the West Coast Modern playlist
-```{r}
-east_new_song <-
+east_new_song_data <-
   get_tidy_audio_analysis("0DNOrkMQjmB0W99PU2LlDe?") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
 
-par(mfrow = c(2,1))
+songs_old_data <-
+  bind_rows(
+    west_song_data %>% mutate(song = west_song_name),
+    east_song_data %>% mutate(song = east_song_name)
+    )
+
+songs_new_data<-
+  bind_rows(
+    west_new_song_data %>% mutate(song = west_new_song_name),
+    east_new_song_data %>% mutate(song = east_new_song_name)
+  )
+
 ```
 
-```{r}
-east_new_song %>%
+```{r, fig.show="hold", out.width="50%"}
+
+fig<-songs_old_data %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
   ggplot(
@@ -411,14 +372,45 @@ east_new_song %>%
   geom_tile() +
   labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
   theme_minimal() +
-  scale_fill_viridis_c()
+  scale_fill_viridis_c()+
+  facet_wrap(~song)
+ggplotly(fig)
 ```
-> song name
+***
+The first thing to point out is that Loungin is a lot shorter. As for the pithce: in Loungin higher pitches are more prevalent and in Fuck Tha Police there's more lower pitches.
+
+### Pitch Analysis Modern
+
+```{r, fig.show="hold", out.width="50%"}
+
+fig<-songs_new_data %>%
+  mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()+
+  facet_wrap(~song)
+ggplotly(fig)
+```
+***
+Again, the East song is shorter and middle pitches are more prevalent. The west song has a lot of low pitches.
+
+### Chord and Key Comparison of two old school hip-hop songs
 
 ```{r}
 circshift <- function(v, n) {
   if (n == 0) v else c(tail(v, n), head(v, -n))
 }
+
 #      C     C#    D     Eb    E     F     F#    G     Ab    A     Bb    B
 major_chord <-
   c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    0,    0)
@@ -426,10 +418,12 @@ minor_chord <-
   c(   1,    0,    0,    1,    0,    0,    0,    1,    0,    0,    0,    0)
 seventh_chord <-
   c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    1,    0)
+
 major_key <-
   c(6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88)
 minor_key <-
   c(6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17)
+
 chord_templates <-
   tribble(
     ~name, ~template,
@@ -469,6 +463,7 @@ chord_templates <-
     "B:maj", circshift(major_chord, 11),
     "D#:min", circshift(minor_chord, 3)
   )
+
 key_templates <-
   tribble(
     ~name, ~template,
@@ -497,244 +492,292 @@ key_templates <-
     "B:maj", circshift(major_key, 11),
     "D#:min", circshift(minor_key, 3)
   )
+  
 ```
 
-
-### Chordogram comparison of two old school hip-hop songs
-
-#### Fuck the Police
-
 ```{r}
+west_song <-
+  get_tidy_audio_analysis("5n8Aro6j1bEGIy7Tpo7FV7?")
 
-# west_song %>%
-#   compmus_align(bars, segments) %>%
-#   select(bars) %>%
-#   unnest(bars) %>%
-#   mutate(
-#     pitches =
-#       map(segments,
-#         compmus_summarise, pitches,
-#         method = "mean", norm = "manhattan"
-#       )
-#   ) %>% 
-#   compmus_match_pitch_template(chord_templates, "euclidean", "manhattan") %>%
-#   ggplot(
-#     aes(x = start + duration / 2, width = duration, y = name, fill = d)
-#   ) +
-#   geom_tile() +
-#   scale_fill_viridis_c() +
-#   theme_minimal() +
-#   labs(x = "Time (s)", y = "")
-# 
-# 
-# # west_song %>%
-# #   compmus_align(sections, segments) %>%
-# #   select(sections) %>%
-# #   unnest(sections) %>%
-# #   mutate(
-# #     pitches =
-# #       map(segments,
-# #         compmus_summarise, pitches,
-# #         method = "mean", norm = "manhattan"
-# #       )
-# #   )
-# 
-# west_song %>% 
-#   compmus_match_pitch_template(
-#     key_templates,         # Change to chord_templates if descired
-#     method = "euclidean",  # Try different distance metrics
-#     norm = "manhattan"     # Try different norms
-#   ) %>%
-#   ggplot(
-#     aes(x = start + duration / 2, width = duration, y = name, fill = d)
-#   ) +
-#   geom_tile() +
-#   scale_fill_viridis_c(guide = "none") +
-#   theme_minimal() +
-#   labs(x = "Time (s)", y = "") +
-#   theme(axis.text=element_text(size=5))
+east_song <-
+  get_tidy_audio_analysis("0UN5OvKlbg06LnZyVk48ll")
+
+west_new_song <-
+  get_tidy_audio_analysis("3r4wZRhYjAhqW4QjK9Z0sN")
+
+east_new_song <-
+  get_tidy_audio_analysis("0DNOrkMQjmB0W99PU2LlDe?")
 ```
 
-#### Loungin
+> `r west_song_name`
 
-```{r}
-get_tidy_audio_analysis("0UN5OvKlbg06LnZyVk48ll") %>%
-  compmus_align(bars, segments) %>%
-  select(bars) %>%
-  unnest(bars) %>%
+```{r, fig.show="hold", out.width="50%"}
+west_song_chord <-
+  west_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
   mutate(
     pitches =
       map(segments,
         compmus_summarise, pitches,
         method = "mean", norm = "manhattan"
       )
-  ) %>% 
-  compmus_match_pitch_template(chord_templates, "euclidean", "manhattan") %>%
+  )
+
+west_song_chord %>% 
+  compmus_match_pitch_template(
+    chord_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
   ggplot(
     aes(x = start + duration / 2, width = duration, y = name, fill = d)
   ) +
   geom_tile() +
   scale_fill_viridis_c(guide = "none") +
   theme_minimal() +
-  labs(x = "Time (s)", y = "")
-```
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Chords")
 
 
-Comparison of east-coast old school hiphop song *Shook Ones Pt. II* by Mobb Deep with old school west-coast hiphop song *Gangsta's Paradise* from Coolio. The songs have a different style as they are from opposite side's of the country but both are from 1995 and some similarities can be found in their structure. The chordograms both represent stronger intensity with the darklines on B:7, E:7, C#:min, Eb:7 and Bb:7.
-
-
-
-### Representation of the Chroma- and Timbre features for the song "Insane in the Brain - Cypress Hill"
-
-```{r}
-insane <-
-  get_tidy_audio_analysis("1oTHteQbmJw15rPxPVXUTv") %>%
-  compmus_align(bars, segments) %>%
-  select(bars) %>%
-  unnest(bars) %>%
+west_song_key <-
+  west_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
   mutate(
     pitches =
       map(segments,
         compmus_summarise, pitches,
-        method = "acentre", norm = "manhattan"
-      )
-  ) %>%
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "mean"
+        method = "mean", norm = "manhattan"
       )
   )
-bind_rows(
-  insane %>% 
-    compmus_self_similarity(pitches, "aitchison") %>% 
-    mutate(d = d / max(d), type = "Chroma"),
-  insane %>% 
-    compmus_self_similarity(timbre, "euclidean") %>% 
-    mutate(d = d / max(d), type = "Timbre")
-) %>%
-  mutate() %>% 
+
+west_song_key %>% 
+  compmus_match_pitch_template(
+    key_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
   ggplot(
-    aes(
-      x = xstart + xduration / 2,
-      width = xduration,
-      y = ystart + yduration / 2,
-      height = yduration,
-      fill = d
-    )
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
   ) +
   geom_tile() +
-  coord_fixed() +
-  facet_wrap(~type) +
-  scale_fill_viridis_c(option = "E", guide = "none") +
-  theme_classic() + 
-  labs(x = "", y = "")
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle('Keys')
+
+```
+
+> `r east_song_name`
+
+```{r, fig.show="hold", out.width="50%"}
+
+east_song_chord <-
+  east_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
+
+east_song_chord %>% 
+  compmus_match_pitch_template(
+    chord_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Chords")
+
+
+east_song_key <-
+  east_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
+
+east_song_key %>% 
+  compmus_match_pitch_template(
+    key_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Keys")
+
 ```
 
 
 ***
-This chroma and timbre based self-similarty matrix represents the pitch and timbres' structure for the song "Insane in the Brain by the notorious West Coast rap collective Cypress Hill. The chroma and timbre matrices differ greatly in terms of structure. Only the start and end of the song seem to have some similarities. The square boxes visible in both matrices are positioned in different places. No clear structure can be seen in both figures.
+The Chords look fairly similar between coasts. The keys are very different. The East song is mainly in minor keys, except for one moment around 90 seconds. The West song has more diversity in keys.
+
+### Chord and Key Comparison Modern
+
+> `r west_new_song_name`
+
+```{r, fig.show="hold", out.width="50%"}
+west_new_song_chord <-
+  west_new_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
+
+west_new_song_chord %>% 
+  compmus_match_pitch_template(
+    chord_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Chords")
 
 
-```{r clustering}
-# Function setup
-# get_conf_mat <- function(fit) {
-#   outcome <- .get_tune_outcome_names(fit)
-#   fit %>% 
-#     collect_predictions() %>% 
-#     conf_mat(truth = outcome, estimate = .pred_class)
-# }  
-# 
-# get_pr <- function(fit) {
-#   fit %>% 
-#     conf_mat_resampled() %>% 
-#     group_by(Prediction) %>% mutate(precision = Freq / sum(Freq)) %>% 
-#     group_by(Truth) %>% mutate(recall = Freq / sum(Freq)) %>% 
-#     ungroup() %>% filter(Prediction == Truth) %>% 
-#     select(class = Prediction, precision, recall)
-# }  
-# ###
-# 
-# old_plsts <-
-#   bind_rows(west %>% mutate(category = "West Coast Classics"))%>%
-#   add_audio_analysis() %>%
-#   mutate(
-#     segments = map2(segments, key, compmus_c_transpose),
-#     pitches =
-#       map(segments,
-#         compmus_summarise, pitches,
-#         method = "mean", norm = "manhattan"
-#       ),
-#     timbre =
-#       map(
-#         segments,
-#         compmus_summarise, timbre,
-#         method = "mean"
-#       )
-#   ) %>%
-#   mutate(pitches = map(pitches, compmus_normalise, "clr")) %>%
-#   mutate_at(vars(pitches, timbre), map, bind_rows) %>%
-#   unnest(cols = c(pitches, timbre))
-# 
-# old_plsts_juice <-
-#   recipe(
-#     track.name ~
-#       danceability +
-#       energy +
-#       loudness +
-#       speechiness +
-#       acousticness +
-#       instrumentalness +
-#       liveness +
-#       valence +
-#       tempo,# +
-#       #duration +
-#       #C + `C#|Db` + D + `D#|Eb` +
-#       #E + `F` + `F#|Gb` + G +
-#       #`G#|Ab` + A + `A#|Bb` + B +
-#       #c01 + c02 + c03 + c04 + c05 + c06 +
-#       #c07 + c08 + c09 + c10 + c11 + c12,
-#     data = old_plsts
-#   ) %>%
-#   step_center(all_predictors()) %>%
-#   step_scale(all_predictors()) %>%
-#   # step_range(all_predictors()) %>%
-#   prep(old_plsts %>% mutate(track.name = str_trunc(track.name, 20))) %>%
-#   juice() %>%
-#   column_to_rownames("track.name")
+west_new_song_key <-
+  west_new_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
 
-#old_plsts_dist <- dist(old_plsts_juice, method = "euclidean")
+west_new_song_key %>% 
+  compmus_match_pitch_template(
+    key_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Keys")
+
 ```
 
-### Clustering
-```{r}
-# old_plsts_dist %>%
-#   hclust(method = "single") %>% # Try single, average, and complete.
-#   dendro_data() %>%
-#   ggdendrogram()
-# 
-# heatmaply(
-#   old_plsts_juice,
-#   hclustfun = hclust,
-#   hclust_method = "average",  # Change for single, average, or complete linkage.
-#   dist_method = "euclidean"
-# )
+> `r east_new_song_name`
+
+```{r, fig.show="hold", out.width="50%"}
+
+east_new_song_chord <-
+  east_new_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
+
+east_new_song_chord %>% 
+  compmus_match_pitch_template(
+    chord_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Chords")
+
+
+east_new_song_key <-
+  east_new_song %>%
+  compmus_align(sections, segments) %>%
+  select(sections) %>%
+  unnest(sections) %>%
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      )
+  )
+
+east_new_song_key %>% 
+  compmus_match_pitch_template(
+    key_templates,         # Change to chord_templates if descired
+    method = "euclidean",  # Try different distance metrics
+    norm = "manhattan"     # Try different norms
+  ) %>%
+  ggplot(
+    aes(x = start + duration / 2, width = duration, y = name, fill = d)
+  ) +
+  geom_tile() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "")+
+  ggtitle("Keys")
+
 ```
+
+
 ***
-Features that dominate the West Coast Classics playlists
+The Modern songs are more different between coasts.The West coast song has two periods where there's more intensity in both Chords and Keys, while for the East song things only happen in the very beginning.
 
-### Tempo analysis "Insane in the Brain - Cypress Hill"
+### Tempo Novelty
 
-```{r tempo_analsis}
+> Classics
 
-insane_segments <-
-  get_tidy_audio_analysis("1oTHteQbmJw15rPxPVXUTv") %>%
+```{r, fig.show="hold", out.width="50%"}
+
+west_song %>%
   select(segments) %>%
-  unnest(segments)
-
-
-insane_segments %>%
+  unnest(segments)  %>%
   mutate(loudness_max_time = start + loudness_max_time) %>%
   arrange(loudness_max_time) %>%
   mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
@@ -742,73 +785,179 @@ insane_segments %>%
   geom_line() +
   xlim(0, 30) +
   theme_minimal() +
-  labs(x = "Time (s)", y = "Novelty")
+  labs(x = "Time (s)", y = "Novelty")+
+  ggtitle('West Song')
 
-insane_segments %>%
-  mutate(pitches = map(pitches, compmus_normalise, "clr")) %>%
-  arrange(start) %>%
-  mutate(pitches = map2(pitches, lag(pitches), `-`)) %>%
-  slice(-1) %>%
-  compmus_gather_chroma() %>%
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = pitch_class,
-      fill = pmax(0, value)
-    )
-  ) +
-  geom_tile() +
-  scale_fill_viridis_c(guide = "none") +
+east_song %>%
+  select(segments) %>%
+  unnest(segments)  %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
   xlim(0, 30) +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_classic()
+  theme_minimal() +
+  labs(x = "Time (s)", y = "Novelty")+
+  ggtitle('East Song')
 
-insane_segments %>%
-  arrange(start) %>%
-  mutate(timbre = map2(timbre, lag(timbre), `-`)) %>%
-  slice(-1) %>%
-  compmus_gather_timbre() %>%
-  ggplot(
-    aes(
-      x = start + duration / 2,
-      width = duration,
-      y = basis,
-      fill = pmax(0, value)
-    )
-  ) +
-  geom_tile() +
-  scale_fill_viridis_c(guide = "none") +
+```
+
+> Modern
+
+```{r, fig.show="hold", out.width="50%"}
+
+west_new_song %>%
+  select(segments) %>%
+  unnest(segments)  %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
   xlim(0, 30) +
-  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
-  theme_classic()
-```
-*** 
-A lot of novelty in tempo
+  theme_minimal() +
+  labs(x = "Time (s)", y = "Novelty")+
+  ggtitle('West Song')
 
-### Tempograms "Insane in the Brain - Cypress Hill"
-
-```{r tempograms}
-# insane <-get_tidy_audio_analysis("1oTHteQbmJw15rPxPVXUTv")
-# 
-# insane %>%
-#   tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
-#   ggplot(aes(x = time, y = bpm, fill = power)) +
-#   geom_raster() +
-#   scale_fill_viridis_c(guide = "none") +
-#   labs(x = "Time (s)", y = "Tempo (BPM)") +
-#   theme_classic()
-# 
-# insane %>%
-#   tempogram(window_size = 8, hop_size = 1, cyclic = TRUE) %>%
-#   ggplot(aes(x = time, y = bpm, fill = power)) +
-#   geom_raster() +
-#   scale_fill_viridis_c(guide = "none") +
-#   labs(x = "Time (s)", y = "Tempo (BPM)") +
-#   theme_classic()
+east_new_song %>%
+  select(segments) %>%
+  unnest(segments)  %>%
+  mutate(loudness_max_time = start + loudness_max_time) %>%
+  arrange(loudness_max_time) %>%
+  mutate(delta_loudness = loudness_max - lag(loudness_max)) %>%
+  ggplot(aes(x = loudness_max_time, y = pmax(0, delta_loudness))) +
+  geom_line() +
+  xlim(0, 30) +
+  theme_minimal() +
+  labs(x = "Time (s)", y = "Novelty")+
+  ggtitle('East Song')
 ```
+
 ***
-Look at which bpm corresponds to yellow lines 
+These plots potentially suggest a great feature to differentiate between the old and new songs-tempo novelty in the beginning of the song. Both old songs start with a big drop, while the new songs do not have it. Also, East coast songs seem to change tempo more frequently compared to the West ones.
+    
+  
+
+
+### Classification
+
+```{r}
+
+rap <-
+  bind_rows(
+    west %>% mutate(playlist = "West Coast Classics")%>% slice_head(n = 20),
+    east %>% mutate(playlist = "East Coast Classics")%>% slice_head(n = 20),
+    west_new %>% mutate(playlist = "West Coast Modern")%>% slice_head(n = 20),
+    east_new %>% mutate(playlist = "East Coast Modern")%>% slice_head(n = 20)
+  )
+
+rap_features <-
+  rap %>%
+  add_audio_analysis() %>%
+  mutate(
+    playlist = factor(playlist),
+    segments = map2(segments, key, compmus_c_transpose),
+    pitches =
+      map(
+        segments,
+        compmus_summarise, pitches,
+        method = "mean", norm = "manhattan"
+      ),
+    timbre =
+      map(
+        segments,
+        compmus_summarise, timbre,
+        method = "mean",
+      )
+  ) %>%
+  mutate(pitches = map(pitches, compmus_normalise, "clr")) %>%
+  mutate_at(vars(pitches, timbre), map, bind_rows) %>%
+  unnest(cols = c(pitches, timbre))
+
+rap_recipe <-
+  recipe(
+    playlist ~
+      danceability +
+      energy +
+      loudness +
+      speechiness +
+      acousticness +
+      instrumentalness +
+      liveness +
+      valence +
+      tempo +
+      duration +
+      C + `C#|Db` + D + `D#|Eb` +
+      E + `F` + `F#|Gb` + G +
+      `G#|Ab` + A + `A#|Bb` + B +
+      c01 + c02 + c03 + c04 + c05 + c06 +
+      c07 + c08 + c09 + c10 + c11 + c12,
+    data = rap_features,          # Use the same name as the previous block.
+  ) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors())      # Converts to z-scores.
+  # step_range(all_predictors())    # Sets range to [0, 1].
+
+rap_cv <- rap_features %>% vfold_cv(5)
+
+forest_model <-
+  rand_forest() %>%
+  set_mode("classification") %>%
+  set_engine("ranger", importance = "impurity")
+
+rap_forest <-
+  workflow() %>%
+  add_recipe(rap_recipe) %>%
+  add_model(forest_model) %>%
+  fit_resamples(
+    rap_cv,
+    control = control_resamples(save_pred = TRUE)
+  )
+```
+
+```{r}
+get_conf_mat <- function(fit) {
+  outcome <- .get_tune_outcome_names(fit)
+  fit %>%
+    collect_predictions() %>%
+    conf_mat(truth = outcome, estimate = .pred_class)
+}
+
+get_pr <- function(fit) {
+  fit %>%
+    conf_mat_resampled() %>%
+    group_by(Prediction) %>% mutate(precision = Freq / sum(Freq)) %>%
+    group_by(Truth) %>% mutate(recall = Freq / sum(Freq)) %>%
+    ungroup() %>% filter(Prediction == Truth) %>%
+    select(class = Prediction, precision, recall)
+}
+```
+
+```{r} 
+rap_forest %>% get_pr()
+```
+
+```{r} 
+workflow() %>%
+  add_recipe(rap_recipe) %>%
+  add_model(forest_model) %>%
+  fit(rap_features) %>%
+  pluck("fit", "fit", "fit") %>%
+  ranger::importance() %>%
+  enframe() %>%
+  mutate(name = fct_reorder(name, value)) %>%
+  ggplot(aes(name, value)) +
+  geom_col() +
+  coord_flip() +
+  theme_minimal() +
+  labs(x = NULL, y = "Importance")
+```
+
+***
+Here a random forest is estimated. It is interesting that precision is higher for some playlist than for others. This suggests that West Coast Classics is the most different from the rest of the playlists (easiest to classify correctly).
+The feature importance graph shows that duration, tempo, valence and acousticness are important in differentiating among playlists. This, on the one hand, is helpful in playlist comparison, but also to suggest which features are the most important to look at when aiming to classify new songs. It is worth noting that the sample is very small - only 20 songs for each playlist and that they are selected not randomly, but the first 20, which introduces a bias of Spotify selection.
+
 
 Conclusion
 =========================================
