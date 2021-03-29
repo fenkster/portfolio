@@ -177,7 +177,28 @@ all_stats <-
 kable(all_stats)
 ```
 
-Point out where you see the biggest differences.
+**Analysis of Averages**
+I have calculated the mean of all the Spotify Audio feature's for each of the playlist's in my corpus. This will allow my to find the most typical and atypical tracks.
+
+**Danceability**
+Danceability seems to be higher in the playlists from the West Coast, highlighting the liveliness and positive mood of West Coast hip-hop music.
+
+All the means are quite close to each other but the Southern playlist leans towards the West Coast in terms of danceability. 
+
+**Valence**
+Valence is higher for the "classic" playlists, this trend is clear with the West Coast, East Coast and Southern Classic playlists. Songs during the classical period of Hip-Hop tended to be a lot more optimistic. Today rap is a lot more depressing.
+
+**Energy**
+
+**Acousticness**
+
+**Speechiness**
+
+**Tempo**
+
+**Instrumentalness**
+
+**Liveness**
 
 ### Visualising the guesses
 
@@ -964,6 +985,7 @@ Conclusion
 ### Conclusion: Discussion of findings
 
 This analysis has enabled me to compare two styles and two generations of hip-hop (90s and today) highlighting the  features and variables that have evolved over time. Hip-hop culture today is much different than in the 80s and 90s with artists gaining access to quick distribution, cheap production and easy online traction. The music industry landscape has changed drastically boosting the Hip-Hop genre to dominate chart positions all over the world.
+
 ```{=html}
 <object data="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140">
     <embed src="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140"></embed>
