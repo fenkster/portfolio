@@ -6,11 +6,11 @@ output:
   flexdashboard::flex_dashboard:
     #vertical_layout: fill
     #orientation: columns
-    #storyboard: true
+    storyboard: true
     theme: cosmo
+    #vertical_layout: scroll
 ---
 ```{r setup}
-
 library(tidyverse)
 library(spotifyr)
 library(compmus)
@@ -19,7 +19,6 @@ library(tidymodels)
 library(ggdendro)
 library(heatmaply)
 library(knitr)
-
 #access_token <- get_spotify_access_token()
 ```
 
@@ -28,29 +27,69 @@ Introduction
 
 ### West v.s. East Coast Hip-Hop
 
-The **West Coast - East Coast Hip-Hop** rivalry stems from the mid-1990s. This feud exploded in popularity during the emergence of iconic rappers The Notorious B.I.G. from New York, and Tupac Shakur in Los Angeles. Artists such as these would regularly release diss tracks, calling each other out in epic rap battles. As this rivalry grew, each of the coast’s started creating their own distinctive sound to distance themselves from each other. The focal point of this project is to compare how these styles differed both during the “Golden Age of Hip-Hop” and today. 
+The **West Coast - East Coast Hip-Hop** rivalry stems from the mid-1990s. This feud exploded in popularity during the emergence of iconic rappers The Notorious B.I.G. from New York, and Tupac Shakur in Los Angeles. Artists such as these would regularly release diss tracks, calling each other out in epic rap battles. As this rivalry grew, each of the coasts started creating their own distinctive sound to distance themselves from each other. The focal point of this project is to compare how these styles differed both during the “Golden Age of Hip-Hop” and today. Additionally, I will also compare a newer style of the South to see which of the coasts inspired it more.
 
-The corpus I will be analysing to achieve this consists of four main playlists with an additional one to be used for classification, each containing 50 tracks. The old school Hip-Hop playlists each featuring the two individual styles are named; *I love My West Coast Classics* & *I Love My East Coast Classics*. The contemporary versions of these playlists have two separate sources; *State of Mind* consists of “new school” east-coast songs mainly from New York and has been curated by Spotify. It’s contrasting playlist representing the West Coast has been curated by Apple Music with the name *Cali Fire* featuring hits mainly from California. The playlists and visualisations I have used in this project will allow me to discover the musicological differences of these styles. I have decided to include an extra playlist called “I Love My Down South Classics” which I will use in the classification exercise to determine whether Southern based Hip-Hop is more similar to East or West Coast rap and if any major influences can be detected. This portfolio aims to provide a comprehensive overview of the similarities and differences present in each of these styles of American Hip-Hop. 
+
+The corpus I will be analysing to achieve this consists of four main playlists with an additional one to be used for classification, each containing 50 tracks. The old school Hip-Hop playlists each featuring the two individual styles are named; *I love My West Coast Classics* & *I Love My East Coast Classics*. The contemporary versions of these playlists have two separate sources; *State of Mind* consists of “new school” east-coast songs mainly from New York and has been curated by Spotify. Its contrasting playlist representing the West Coast has been curated by Apple Music with the name *Cali Fire* featuring hits mainly from California. The playlists and visualisations I have used in this project allow me to discover the musicological differences of these styles. I have decided to include an extra playlist called “I Love My Down South Classics” which I will use in the classification exercise to determine whether Southern based Hip-Hop is more similar to East or West Coast rap and if any major influences can be detected. This portfolio aims to provide a comprehensive overview of the similarities and differences present in each of these styles of American Hip-Hop. 
 
 My preliminary assumptions can be summarised as follows. East Coast hiphop carries a more aggressive sound, while West Coast hip-hop is more laid back. East Coast natives include Public Enemy, Notorious BIG, Nas, Rakim, Run DMC and KRS One, all known for thought provoking complex lyricism accented by hard-hitting beats. West Coast Hip-Hop is mainly known for dancing and partying. Noteworthy artists from this side features The Game, Tupac Shakur, Snoop Dogg and Grandmaster Flash. The West coast scene also popularised G-Funk, a fusion between hip-hop and funk music. 
 
 
 **East Coast:** *Where it all started.*
 
-- I Love My East Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DWYGxBNe4qojI?si=Vnk0_2JORM6iL9ZK687ohQ)
+- I Love My East Coast Classics:
 
-- State of Mind: (https://open.spotify.com/playlist/37i9dQZF1DX1YPTAhwehsC?si=qaVXWuBySnWcegc6X_q0ug)
+```{=html}
+<center>
+<object data="https://open.spotify.com/embed/playlist/37i9dQZF1DWYGxBNe4qojI" width="300" height="380">
+    <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYGxBNe4qojI" width="300" height="380"></embed>
+</object>
+</center>
+```
+
+- State of Mind:
+
+```{=html}
+<center>
+<object data="https://open.spotify.com/embed/playlist/37i9dQZF1DX1YPTAhwehsC" width="300" height="380">
+    <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DX1YPTAhwehsC" width="300" height="380"></embed>
+</object>
+</center>
+```
 
 **West Coast:** *The best side!*
 
-- I Love My West Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DX9sQDbOMReFI?si=vn1s69TjRxqx43Kc62lVxA)
+- I Love My West Coast Classics:
 
-- Cali Fire: (https://open.spotify.com/playlist/3X0Ds1IEYdG1DL0sxCuW6y?si=-G0PuulVTFGmY2oaP490Ag)
+```{=html}
+<center>
+<object data="https://open.spotify.com/embed/playlist/37i9dQZF1DX9sQDbOMReFI" width="300" height="380">
+    <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9sQDbOMReFI" width="300" height="380"></embed>
+</object>
+</center>
+```
+
+- Cali Fire:
+
+```{=html}
+<center>
+<object data="https://open.spotify.com/embed/playlist/3X0Ds1IEYdG1DL0sxCuW6y" width="300" height="380">
+    <embed src="https://open.spotify.com/embed/playlist/3X0Ds1IEYdG1DL0sxCuW6y" width="300" height="380"></embed>
+</object>
+</center>
+```
 
 **Southern:** *The South got something to say.*
 
-- I Love My South Coast Classics: (https://open.spotify.com/playlist/37i9dQZF1DWYok9l1JL7GM?si=y5v7D453SI-IeLxqJyHM4w)
+- I Love My Down South Classics:
 
+```{=html}
+<center>
+<object data="https://open.spotify.com/embed/playlist/37i9dQZF1DWYok9l1JL7GM" width="300" height="380">
+    <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYok9l1JL7GM" width="300" height="380"></embed>
+</object>
+</center>
+```
 
 Analysis {.storyboard}
 =========================================
@@ -58,12 +97,9 @@ Analysis {.storyboard}
 ```{r}
 west <- get_playlist_audio_features("", "37i9dQZF1DX9sQDbOMReFI")
 east <- get_playlist_audio_features("", "37i9dQZF1DWYGxBNe4qojI")
-
 south<- get_playlist_audio_features("","37i9dQZF1DWYok9l1JL7GM")
-
 west_new <- get_playlist_audio_features("", "3X0Ds1IEYdG1DL0sxCuW6y")
 east_new <- get_playlist_audio_features("", "37i9dQZF1DX1YPTAhwehsC")
-
 ```
 
 ### Descriptive Statistics
@@ -173,12 +209,11 @@ all_stats <-
     east_new_summary %>% mutate(category = "East Coast Modern"),
     south_summary %>% mutate(category = "South")
   )
-
 kable(all_stats)
 ```
 
 **Analysis of Averages:**
-I have calculated the mean of all the Spotify Audio feature's for each of the playlist's in my corpus. This will allow my to find the most typical and atypical tracks.
+I have calculated the mean of all the Spotify Audio feature's for each of the playlists in my corpus. This will allow me to find the most typical and atypical tracks.
 
 **Danceability:**
 Danceability seems to be higher in the playlists from the West Coast, highlighting the liveliness and positive mood of West Coast hip-hop music.
@@ -186,7 +221,7 @@ Danceability seems to be higher in the playlists from the West Coast, highlighti
 All the means are quite close to each other but the Southern playlist leans towards the West Coast in terms of danceability. 
 
 **Valence:**
-Valence is higher for the "classic" playlists, this trend is clear with the West Coast, East Coast and Southern Classic playlists. Songs during the classical period of Hip-Hop tended to be a lot more optimistic. Today rap is a lot more depressing.
+Valence is higher for the "classic" playlists, this trend is clear with the West Coast, East Coast and Southern Classic playlists. Songs during the classical period of Hip-Hop tended to be a lot more optimistic. Today's rap is a lot more depressing.
 
 **Energy:**
 Energy is highest in the Southern Classics playlist, this makes sense to me due to the very distinct production present in Southern American hip-hop. 
@@ -249,16 +284,16 @@ interactive<-together %>%
   #   nudge_y = 0.02            # Nudge the label slightly up.
   # ) +
   facet_wrap(~playlist) +     # Separate charts per playlist.
-  scale_x_continuous(         # Fine-tune the x axis.
-    limits = c(0, 1),
-    breaks = c(0, 0.50, 1),   # Use grid-lines for quadrants only.
-    minor_breaks = NULL       # Remove 'minor' grid-lines.
-  ) +
-  scale_y_continuous(         # Fine-tune the y axis in the same way.
-    limits = c(0, 1),
-    breaks = c(0, 0.50, 1),
-    minor_breaks = NULL
-  ) +
+  # scale_x_continuous(         # Fine-tune the x axis.
+  #   limits = c(0, 1),
+  #   breaks = c(0, 0.50, 1),   # Use grid-lines for quadrants only.
+  #   minor_breaks = NULL       # Remove 'minor' grid-lines.
+  # ) +
+  # scale_y_continuous(         # Fine-tune the y axis in the same way.
+  #   limits = c(0, 1),
+  #   breaks = c(0, 0.50, 1),
+  #   minor_breaks = NULL
+  # ) +
   scale_colour_brewer(        # Use the Color Brewer to choose a palette.
     type = "qual",            # Qualitative set.
     palette = "Paired",  # Name of the palette is 'Paired'.
@@ -274,7 +309,6 @@ interactive<-together %>%
     colour = "Mode",
     size="Acousticness"
   )
-
 #ggplotly(interactive) #%>%
   # layout(legend = list(
   #     orientation = "h",
@@ -285,21 +319,28 @@ interactive<-together %>%
 ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5))
 ```
 
+this enables scrolling
+
 ***
 
 These charts display four important metrics for each playlist in my corpus. We compare valence, energy, loudness and mode in this comprehensive visualization.
 
-need to fix the legend
-
 
 ### Most average songs
+
+In the upcoming sections some track level analysis is conducted. To have some more or less scientific grounds of choosing a representative track, I created a function that chooses quite literally the most average track in the playlist (compared to other tracks in the same playlist) by Spotify's metrics.
+
+The function calculates the sum of absolute distances between each feature of the songs in the playlist and the feature's mean. The songs with the minimum difference are chosen to be the 'most average'.
+
+Here's the function's code:
+
 ```{r get_most_average_song, echo=TRUE}
 get_most_average_song <- function(playlist) 
 {
   metrics<-c("danceability","energy","key","loudness","mode","speechiness",
              "acousticness","instrumentalness","liveness","valence","tempo")
   
-  mean_metrics=colMeans(playlist[,metrics])
+  mean_metrics=colMeans(playlist[,metrics],na.rm = TRUE)
   playlist$diff=rep(0,nrow(playlist))
   
  for(i in 1:nrow(playlist)) {
@@ -311,16 +352,13 @@ get_most_average_song <- function(playlist)
 ```
 
 
-```{r echo=TRUE}
+```{r}
 east<-get_most_average_song(east)[[1]]
 east_song_name<-get_most_average_song(east)[[2]]
-
 west<-get_most_average_song(west)[[1]]
 west_song_name<-get_most_average_song(west)[[2]]
-
 east_new<-get_most_average_song(east_new)[[1]]
 east_new_song_name<-get_most_average_song(east_new)[[2]]
-
 west_new<-get_most_average_song(west_new)[[1]]
 west_new_song_name<-get_most_average_song(west_new)[[2]]
 ```
@@ -333,9 +371,6 @@ The most average song from *Cali Fire* is **`r west_new_song_name`.**
 
 The most average song from *State of Mind* is **`r east_new_song_name`.**
 
-***
-The function calculates the sum of absolute distances between each feature of the songs in the playlist and the feature's mean. The songs with the minimum difference are chosen to be the 'most average'.
-
 ### Pitch Analysis Classics
 
 ```{r}
@@ -345,41 +380,34 @@ west_song_data <-
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
-
 east_song_data <-
   get_tidy_audio_analysis("0UN5OvKlbg06LnZyVk48ll") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
-
 west_new_song_data <-
   get_tidy_audio_analysis("3r4wZRhYjAhqW4QjK9Z0sN") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
-
 east_new_song_data <-
   get_tidy_audio_analysis("0DNOrkMQjmB0W99PU2LlDe?") %>%
   select(segments) %>%
   unnest(segments) %>%
   select(start, duration, pitches)
-
 songs_old_data <-
   bind_rows(
     west_song_data %>% mutate(song = west_song_name),
     east_song_data %>% mutate(song = east_song_name)
     )
-
 songs_new_data<-
   bind_rows(
     west_new_song_data %>% mutate(song = west_new_song_name),
     east_new_song_data %>% mutate(song = east_new_song_name)
   )
-
 ```
 
 ```{r, fig.show="hold", out.width="50%"}
-
 fig<-songs_old_data %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
@@ -399,12 +427,11 @@ fig<-songs_old_data %>%
 ggplotly(fig)
 ```
 ***
-The first thing to point out is that **Loungin** is a lot shorter. As for the pitch: in **Loungin** higher pitches are more prevalent and in **Fuck Tha Police** there's more lower pitches.
+The first thing to point out is that **Loungin** is a lot shorter.
 
 ### Pitch Analysis Modern
 
 ```{r, fig.show="hold", out.width="50%"}
-
 fig<-songs_new_data %>%
   mutate(pitches = map(pitches, compmus_normalise, "manhattan")) %>%
   compmus_gather_chroma() %>% 
@@ -424,7 +451,7 @@ fig<-songs_new_data %>%
 ggplotly(fig)
 ```
 ***
-Again, the East coast song is shorter and middle pitches are more prevalent. The west coast song has a lot of low pitches.
+Here, again, the East Coast song is a lot shorter.
 
 ### Chord and Key Comparison of two old school hip-hop songs
 
@@ -432,7 +459,6 @@ Again, the East coast song is shorter and middle pitches are more prevalent. The
 circshift <- function(v, n) {
   if (n == 0) v else c(tail(v, n), head(v, -n))
 }
-
 #      C     C#    D     Eb    E     F     F#    G     Ab    A     Bb    B
 major_chord <-
   c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    0,    0)
@@ -440,12 +466,10 @@ minor_chord <-
   c(   1,    0,    0,    1,    0,    0,    0,    1,    0,    0,    0,    0)
 seventh_chord <-
   c(   1,    0,    0,    0,    1,    0,    0,    1,    0,    0,    1,    0)
-
 major_key <-
   c(6.35, 2.23, 3.48, 2.33, 4.38, 4.09, 2.52, 5.19, 2.39, 3.66, 2.29, 2.88)
 minor_key <-
   c(6.33, 2.68, 3.52, 5.38, 2.60, 3.53, 2.54, 4.75, 3.98, 2.69, 3.34, 3.17)
-
 chord_templates <-
   tribble(
     ~name, ~template,
@@ -485,7 +509,6 @@ chord_templates <-
     "B:maj", circshift(major_chord, 11),
     "D#:min", circshift(minor_chord, 3)
   )
-
 key_templates <-
   tribble(
     ~name, ~template,
@@ -520,19 +543,15 @@ key_templates <-
 ```{r}
 west_song <-
   get_tidy_audio_analysis("5n8Aro6j1bEGIy7Tpo7FV7?")
-
 east_song <-
   get_tidy_audio_analysis("0UN5OvKlbg06LnZyVk48ll")
-
 west_new_song <-
   get_tidy_audio_analysis("3r4wZRhYjAhqW4QjK9Z0sN")
-
 east_new_song <-
   get_tidy_audio_analysis("0DNOrkMQjmB0W99PU2LlDe?")
 ```
 
 > `r west_song_name`
-
 ```{r, fig.show="hold", out.width="50%"}
 west_song_chord <-
   west_song %>%
@@ -546,7 +565,6 @@ west_song_chord <-
         method = "mean", norm = "manhattan"
       )
   )
-
 west_song_chord %>% 
   compmus_match_pitch_template(
     chord_templates,         # Change to chord_templates if descired
@@ -561,8 +579,6 @@ west_song_chord %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Chords")
-
-
 west_song_key <-
   west_song %>%
   compmus_align(sections, segments) %>%
@@ -575,7 +591,6 @@ west_song_key <-
         method = "mean", norm = "manhattan"
       )
   )
-
 west_song_key %>% 
   compmus_match_pitch_template(
     key_templates,         # Change to chord_templates if descired
@@ -590,13 +605,10 @@ west_song_key %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle('Keys')
-
 ```
 
 > `r east_song_name`
-
 ```{r, fig.show="hold", out.width="50%"}
-
 east_song_chord <-
   east_song %>%
   compmus_align(sections, segments) %>%
@@ -609,7 +621,6 @@ east_song_chord <-
         method = "mean", norm = "manhattan"
       )
   )
-
 east_song_chord %>% 
   compmus_match_pitch_template(
     chord_templates,         # Change to chord_templates if descired
@@ -624,8 +635,6 @@ east_song_chord %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Chords")
-
-
 east_song_key <-
   east_song %>%
   compmus_align(sections, segments) %>%
@@ -638,7 +647,6 @@ east_song_key <-
         method = "mean", norm = "manhattan"
       )
   )
-
 east_song_key %>% 
   compmus_match_pitch_template(
     key_templates,         # Change to chord_templates if descired
@@ -653,9 +661,9 @@ east_song_key %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Keys")
-
 ```
 
+this is for scrolling
 
 ***
 The Chords look fairly similar between coasts. The keys are very different. The East coast song is mainly in minor keys, except for one moment around 90 seconds. The West coast song has more diversity in keys.
@@ -663,7 +671,6 @@ The Chords look fairly similar between coasts. The keys are very different. The 
 ### Chord and Key Comparison Modern
 
 > `r west_new_song_name`
-
 ```{r, fig.show="hold", out.width="50%"}
 west_new_song_chord <-
   west_new_song %>%
@@ -677,7 +684,6 @@ west_new_song_chord <-
         method = "mean", norm = "manhattan"
       )
   )
-
 west_new_song_chord %>% 
   compmus_match_pitch_template(
     chord_templates,         # Change to chord_templates if descired
@@ -692,8 +698,6 @@ west_new_song_chord %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Chords")
-
-
 west_new_song_key <-
   west_new_song %>%
   compmus_align(sections, segments) %>%
@@ -706,7 +710,6 @@ west_new_song_key <-
         method = "mean", norm = "manhattan"
       )
   )
-
 west_new_song_key %>% 
   compmus_match_pitch_template(
     key_templates,         # Change to chord_templates if descired
@@ -721,13 +724,10 @@ west_new_song_key %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Keys")
-
 ```
 
 > `r east_new_song_name`
-
 ```{r, fig.show="hold", out.width="50%"}
-
 east_new_song_chord <-
   east_new_song %>%
   compmus_align(sections, segments) %>%
@@ -740,7 +740,6 @@ east_new_song_chord <-
         method = "mean", norm = "manhattan"
       )
   )
-
 east_new_song_chord %>% 
   compmus_match_pitch_template(
     chord_templates,         # Change to chord_templates if descired
@@ -755,8 +754,6 @@ east_new_song_chord %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Chords")
-
-
 east_new_song_key <-
   east_new_song %>%
   compmus_align(sections, segments) %>%
@@ -769,7 +766,6 @@ east_new_song_key <-
         method = "mean", norm = "manhattan"
       )
   )
-
 east_new_song_key %>% 
   compmus_match_pitch_template(
     key_templates,         # Change to chord_templates if descired
@@ -784,9 +780,9 @@ east_new_song_key %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "")+
   ggtitle("Keys")
-
 ```
 
+this is for scrolling
 
 ***
 The Modern songs are more different between coasts.The West coast song has two periods where there's more intensity in both Chords and Keys, while for the East coast song things only happen in the very beginning.
@@ -794,9 +790,7 @@ The Modern songs are more different between coasts.The West coast song has two p
 ### Tempo Novelty
 
 > Classics
-
 ```{r, fig.show="hold", out.width="50%"}
-
 west_song %>%
   select(segments) %>%
   unnest(segments)  %>%
@@ -809,7 +803,6 @@ west_song %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "Novelty")+
   ggtitle('West Song')
-
 east_song %>%
   select(segments) %>%
   unnest(segments)  %>%
@@ -822,13 +815,10 @@ east_song %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "Novelty")+
   ggtitle('East Song')
-
 ```
 
 > Modern
-
 ```{r, fig.show="hold", out.width="50%"}
-
 west_new_song %>%
   select(segments) %>%
   unnest(segments)  %>%
@@ -841,7 +831,6 @@ west_new_song %>%
   theme_minimal() +
   labs(x = "Time (s)", y = "Novelty")+
   ggtitle('West Song')
-
 east_new_song %>%
   select(segments) %>%
   unnest(segments)  %>%
@@ -856,130 +845,280 @@ east_new_song %>%
   ggtitle('East Song')
 ```
 
+this is for scrolling
+
 ***
 These plots potentially suggest a great feature to differentiate between the old and new songs-tempo novelty in the beginning of the song. Both old songs start with a big drop, while the new songs do not have it. Also, East coast songs seem to change tempo more frequently compared to the West ones.
     
-  
+
+```{r}
+# rap <-
+#   bind_rows(
+#     west %>% mutate(playlist = "West Coast Classics"),#%>% slice_head(n = 20),
+#     east %>% mutate(playlist = "East Coast Classics"),#%>% slice_head(n = 20),
+#     west_new %>% mutate(playlist = "West Coast Modern"),#%>% slice_head(n = 20),
+#     east_new %>% mutate(playlist = "East Coast Modern"),#%>% slice_head(n = 20),
+#     south %>% mutate(playlist = "South Rap")#%>% slice_head(n = 20)
+#   )
+# 
+# rap_features <-
+#   rap %>%
+#   add_audio_analysis() %>%
+#   mutate(
+#     playlist = factor(playlist),
+#     track_name = factor(track.name),
+#     segments = map2(segments, key, compmus_c_transpose),
+#     pitches =
+#       map(
+#         segments,
+#         compmus_summarise, pitches,
+#         method = "mean", norm = "manhattan"
+#       ),
+#     timbre =
+#       map(
+#         segments,
+#         compmus_summarise, timbre,
+#         method = "mean",
+#       )
+#   ) %>%
+#   mutate(pitches = map(pitches, compmus_normalise, "clr")) %>%
+#   mutate_at(vars(pitches, timbre), map, bind_rows) %>%
+#   unnest(cols = c(pitches, timbre))
+```
+
+```{r}
+# rap_recipe <-
+#   recipe(
+#     playlist+track.name~
+#       danceability +
+#       energy +
+#       loudness +
+#       speechiness +
+#       acousticness +
+#       instrumentalness +
+#       liveness +
+#       valence +
+#       tempo +
+#       duration +
+#       mode+
+#       key+
+#       C + `C#|Db` + D + `D#|Eb` +
+#       E + `F` + `F#|Gb` + G +
+#       `G#|Ab` + A + `A#|Bb` + B +
+#       c01 + c02 + c03 + c04 + c05 + c06 +
+#       c07 + c08 + c09 + c10 + c11 + c12,
+#     data = rap_features,          # Use the same name as the previous block.
+#   ) %>%
+#   step_center(all_predictors()) %>%
+#   step_scale(all_predictors())      # Converts to z-scores.
+#   # step_range(all_predictors())    # Sets range to [0, 1].
+```
+
+```{r}
+# library(janitor)
+# 
+# rap_prepped<-prep(rap_recipe,rap_features)
+# rap_baked<-bake(rap_prepped,rap_features) %>%clean_names()
+# 
+# write.csv(rap_baked,"~/Desktop/github/portfolio/rap_baked.csv", row.names = FALSE)
+```
+
+```{r}
+rap_ready<-read_csv("~/Desktop/github/portfolio/rap_baked.csv")
+#rap_ready<-rap_baked
+rap_ready$playlist= factor(rap_ready$playlist) 
+rap_ready <- subset(rap_ready, select = -c(duration,track_name))
+# rap_ready<-subset(rap_ready, select=c("danceability","energy","loudness","speechiness",
+#              "acousticness","instrumentalness","liveness","valence","tempo","playlist"))
+test_set<-droplevels(filter(rap_ready, playlist == "South Rap"))
+training_set<-droplevels(filter(rap_ready, playlist != "South Rap"))
+```
+
+```{r}
+set.seed(14)
+library(randomForest)
+
+rf_classifier = randomForest(playlist ~ ., data=training_set, ntree=1000,mtry=15, importance=TRUE,confusion=TRUE)
+
+```
 
 
 ### Classification
 
+```{r confusion matrix}
+rf_classifier
+```
+
+Here a random forest model is estimated. The model was tuned to 1000 samples and the tree depth of 15. This seems to work well as we have quite a few features to choose from at each step (tree depth), but also our training set is relatively small (4x50=200), especially taking into account that we have 4 classes to choose from. Hence, averaging 1000 observations is reasonable. 
+
+Classification error may look high (>30%) at the first glance. However, we are dealing with music and some mistakes are more forgivable than others: although, the algorithm could be better in distinguihing between East and West, it distiguishes very well between time epochs! Classics are almost always classified as Classics, while Modern is almost always Modern.
+
+It is also interesting that precision is significantly higher for some playlists than for others. The confusion matrix suggests that East Coast Modern and West Coast Classics are the most different from the rest of the playlists (classified correctly most often). West Coast Modern is the taughest one to crack - half of the songs are indeed their own genre, but some other 15 songs resemble East Coast Modern, whose features we seem to have identified quite well, and of course some inspiration from West Coast Classics!
+
+Fun Fact: West Coast Modern a.k.a. Cali Fire playlist is curated by Apple Music, not Spotify. This may become a strating point in uncovering the differences in algorithms between the two companies.
+
+All in all, the model seems very reasonable given a not so big training set, 4 classes, and qualitative nature of music itself.
+
+The feature importance graph (next page) shows that tempo, speechiness, instrumentalness and c05 are important in differentiating among playlists. This, on the one hand, is helpful in playlist comparison, but also to suggest which features are the most important to look at when aiming to classify new songs.
+
+### Feature importance
+
+```{r, fig.show="hold", out.width="100%"}
+varImpPlot(rf_classifier)
+```
+
+### Revisiting
+
 ```{r}
-
-rap <-
-  bind_rows(
-    west %>% mutate(playlist = "West Coast Classics")%>% slice_head(n = 20),
-    east %>% mutate(playlist = "East Coast Classics")%>% slice_head(n = 20),
-    west_new %>% mutate(playlist = "West Coast Modern")%>% slice_head(n = 20),
-    east_new %>% mutate(playlist = "East Coast Modern")%>% slice_head(n = 20)
-  )
-
-rap_features <-
-  rap %>%
-  add_audio_analysis() %>%
+interactive<-together %>%                    
   mutate(
-    playlist = factor(playlist),
-    segments = map2(segments, key, compmus_c_transpose),
-    pitches =
-      map(
-        segments,
-        compmus_summarise, pitches,
-        method = "mean", norm = "manhattan"
-      ),
-    timbre =
-      map(
-        segments,
-        compmus_summarise, timbre,
-        method = "mean",
-      )
+    mode = ifelse(mode == 0, "Minor", "Major")
   ) %>%
-  mutate(pitches = map(pitches, compmus_normalise, "clr")) %>%
-  mutate_at(vars(pitches, timbre), map, bind_rows) %>%
-  unnest(cols = c(pitches, timbre))
-
-rap_recipe <-
-  recipe(
-    playlist ~
-      danceability +
-      energy +
-      loudness +
-      speechiness +
-      acousticness +
-      instrumentalness +
-      liveness +
-      valence +
-      tempo +
-      duration +
-      C + `C#|Db` + D + `D#|Eb` +
-      E + `F` + `F#|Gb` + G +
-      `G#|Ab` + A + `A#|Bb` + B +
-      c01 + c02 + c03 + c04 + c05 + c06 +
-      c07 + c08 + c09 + c10 + c11 + c12,
-    data = rap_features,          # Use the same name as the previous block.
-  ) %>%
-  step_center(all_predictors()) %>%
-  step_scale(all_predictors())      # Converts to z-scores.
-  # step_range(all_predictors())    # Sets range to [0, 1].
-
-rap_cv <- rap_features %>% vfold_cv(5)
-
-forest_model <-
-  rand_forest() %>%
-  set_mode("classification") %>%
-  set_engine("ranger", importance = "impurity")
-
-rap_forest <-
-  workflow() %>%
-  add_recipe(rap_recipe) %>%
-  add_model(forest_model) %>%
-  fit_resamples(
-    rap_cv,
-    control = control_resamples(save_pred = TRUE)
+  ggplot(                     # Set up the plot.
+    aes(
+      label=track.name,
+      x = speechiness,
+      y = tempo,
+      size = instrumentalness,
+      colour = mode
+    )
+  ) + geom_point() +              # Scatter plot.
+  #geom_rug(size = 0.1) +      # Add 'fringes' to show data distribution.
+  # geom_text(                  # Add text labels from above.
+  #  aes(
+  #     x = valence,
+  #     y = energy,
+  #     label = label
+  #   ),
+  #   data = 
+  #     tibble(
+  #       label = c("Altijd wel iemand", "ENERGY"),
+  #       category = c("00s", "70s"),
+  #       valence = c(0.090, 0.123),
+  #       energy = c(0.101, 0.967)
+  #     ),
+  #   colour = "black",         # Override colour (not mode here).
+  #   size = 3,                 # Override size (not loudness here).
+  #   hjust = "left",           # Align left side of label with the point.
+  #   vjust = "bottom",         # Align bottom of label with the point.
+  #   nudge_x = -0.05,          # Nudge the label slightly left.
+  #   nudge_y = 0.02            # Nudge the label slightly up.
+  # ) +
+  facet_wrap(~playlist) +     # Separate charts per playlist.
+  # scale_x_continuous(         # Fine-tune the x axis.
+  #   limits = c(0, 1),
+  #   breaks = c(0, 0.50, 1),   # Use grid-lines for quadrants only.
+  #   minor_breaks = NULL       # Remove 'minor' grid-lines.
+  # ) +
+  # scale_y_continuous(         # Fine-tune the y axis in the same way.
+  #   limits = c(0, 1),
+  #   breaks = c(0, 0.50, 1),
+  #   minor_breaks = NULL
+  # ) +
+  scale_colour_brewer(        # Use the Color Brewer to choose a palette.
+    type = "qual",            # Qualitative set.
+    palette = "Paired",  # Name of the palette is 'Paired'.
+    ) +
+  scale_size_continuous(      # Fine-tune the sizes of each point.
+     trans = "exp",            # Use an exp transformation to emphasise loud.
+     #guide = "none"            # Remove the legend for size.
+  ) +
+  theme_light() +             # Use a simpler theme.
+  labs(                       # Make the titles nice.
+    x = "Speechiness",
+    y = "Tempo",
+    colour = "Mode",
+    size="Instrumentalness"
   )
+#ggplotly(interactive) #%>%
+  # layout(legend = list(
+  #     orientation = "h",
+  #     x = "auto",y="auto"))
 ```
 
 ```{r}
-get_conf_mat <- function(fit) {
-  outcome <- .get_tune_outcome_names(fit)
-  fit %>%
-    collect_predictions() %>%
-    conf_mat(truth = outcome, estimate = .pred_class)
-}
-
-get_pr <- function(fit) {
-  fit %>%
-    conf_mat_resampled() %>%
-    group_by(Prediction) %>% mutate(precision = Freq / sum(Freq)) %>%
-    group_by(Truth) %>% mutate(recall = Freq / sum(Freq)) %>%
-    ungroup() %>% filter(Prediction == Truth) %>%
-    select(class = Prediction, precision, recall)
-}
-```
-
-```{r} 
-rap_forest %>% get_pr()
-```
-
-```{r} 
-workflow() %>%
-  add_recipe(rap_recipe) %>%
-  add_model(forest_model) %>%
-  fit(rap_features) %>%
-  pluck("fit", "fit", "fit") %>%
-  ranger::importance() %>%
-  enframe() %>%
-  mutate(name = fct_reorder(name, value)) %>%
-  ggplot(aes(name, value)) +
-  geom_col() +
-  coord_flip() +
-  theme_minimal() +
-  labs(x = NULL, y = "Importance")
+ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5))
 ```
 
 ***
-Here a random forest is estimated. It is interesting that precision is higher for some playlist than for others. This suggests that West Coast Classics is the most different from the rest of the playlists (easiest to classify correctly).
-The feature importance graph shows that duration, tempo, valence and acousticness are important in differentiating among playlists. This, on the one hand, is helpful in playlist comparison, but also to suggest which features are the most important to look at when aiming to classify new songs. It is worth noting that the sample is very small - only 20 songs for each playlist and that they are selected not randomly, but the first 20, which introduces a bias of Spotify selection.
+Now that we know which features are the most impactful, we can revisit my first plot with the new features on the axes. Immediately, we see the similarities within Classics (more clustered in the bottom left corner) and Modern (more spread). In addition, the diffrence in instrumentalness (size on the plot) is also very persistent. This plot also illustrates why it is hard for the model to classify West Coast Modern.
 
+### What about South?
+
+```{r}
+interactive<-south %>%                    
+  mutate(
+    mode = ifelse(mode == 0, "Minor", "Major")
+  ) %>%
+  ggplot(                     # Set up the plot.
+    aes(
+      label=track.name,
+      x = speechiness,
+      y = tempo,
+      size = instrumentalness,
+      colour = mode
+    )
+  ) + geom_point() +              # Scatter plot.
+  scale_colour_brewer(        # Use the Color Brewer to choose a palette.
+    type = "qual",            # Qualitative set.
+    palette = "Paired",  # Name of the palette is 'Paired'.
+    ) +
+  scale_size_continuous(      # Fine-tune the sizes of each point.
+     trans = "exp",            # Use an exp transformation to emphasise loud.
+     #guide = "none"            # Remove the legend for size.
+  ) +
+  theme_light() +             # Use a simpler theme.
+  labs(                       # Make the titles nice.
+    x = "Speechiness",
+    y = "Tempo",
+    colour = "Mode",
+    size="Instrumentalness"
+  )
+```
+
+```{r}
+ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5))
+```
+
+***
+
+There's a long standing debate about where Southern Rappers drew inspiration from: East or West? Modern or Old School?
+I already looked at South Rap in the mean analysis. Now, as a fun exercise, I will use my random forest model trained on the other 4 playlists to classify the songs from the South playlist. But before that, let's look at the most importnant features in the context of the South.
+
+From a preliminary glance, I suspect classification to be difficult task. The Speechiness-Tempo (x-y) positions of the songs resemble more the Modern Playlists, with a few very instrumental songs as in the Classics.
+
+### The moment of truth!
+
+```{r south_preds}
+predictions <- predict(rf_classifier,test_set)
+south_preds<-data.frame(south$track.name,predictions)
+table(predictions)
+```
+The moment of truth! The predictions indeed indicate that the South Rap is more similar to Modern styles (mostly East, but that's also our best defined class), with a bit of the West Coast Classic sound mixed in (probably the instrumental ones). Also, we can be pretty confident that South Rap is almost nothing like East Coast Classics.
+
+These are some exciting findings for a rap or any music lover, as they scientifically quantify such unquantifiable concepts as influence and inspiration.
+
+```{r}
+south<-get_most_average_song(south)[[1]]
+south_song_name<-get_most_average_song(south)[[2]]
+```
+
+P.S. The most average song from *I Love My Down South Classics * is **`r south_song_name`.**
+
+```{=html}
+<object data="https://open.spotify.com/embed/track/1BLz7nBzRElSPfg3ndJkHz" width="280" height="140">
+    <embed src="https://open.spotify.com/embed/track/1BLz7nBzRElSPfg3ndJkHz" width="280" height="140"></embed>
+</object>
+```
+
+### Bonus
+
+```{r}
+#library(DT)
+DT::datatable(south_preds, rownames = FALSE)#, colnames=c('Household Size','0 Bedrooms','1 Bedroom','2 Bedrooms','3 Bedrooms','4 Bedrooms','5+ Bedrooms'), extensions = 'FixedColumns', escape=TRUE, options= list(bPaginate = FALSE, dom = 't',buttons = c('excel')))%>%formatStyle(1:7,fontSize = '14px')
+```
+***
+I hope this works
 
 Conclusion
 =========================================
@@ -987,9 +1126,19 @@ Conclusion
 
 This analysis has enabled me to compare two styles and two generations of hip-hop (90s and today) highlighting the  features and variables that have evolved over time. Hip-hop culture today is much different than in the 80s and 90s with artists gaining access to quick distribution, cheap production and easy online traction. The music industry landscape has changed drastically boosting the Hip-Hop genre to dominate chart positions all over the world.
 
+Some key findings:
+
+Old School Hip-Hop is very different from the new one (slower, more instrumentall, less speechy(not sure that's a word))
+
+The East Coast-West Coast Rivalry is indeed persistent even in the quantitative view of the music. It is a lot easier for the algorithm to distinguish between old East and West songs and very hard between the modern ones.
+
+The South Rap draws some inspiration from the West Coast Classics, but mainly resembles Modern East Coast.
+
+
+
+
 ```{=html}
 <object data="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140">
     <embed src="https://open.spotify.com/embed/track/7lQWRAjyhTpCWFC0jmclT4" width="280" height="140"></embed>
 </object>
 ```
-***
