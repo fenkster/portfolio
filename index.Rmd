@@ -40,11 +40,11 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 - I Love My East Coast Classics:
 
 ```{=html}
-<center>
+<left>
 <object data="https://open.spotify.com/embed/playlist/37i9dQZF1DWYGxBNe4qojI" width="300" height="380">
     <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYGxBNe4qojI" width="300" height="380"></embed>
 </object>
-</center>
+</left>
 ```
 
 - State of Mind:
@@ -62,21 +62,21 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 - I Love My West Coast Classics:
 
 ```{=html}
-<center>
+<left>
 <object data="https://open.spotify.com/embed/playlist/37i9dQZF1DX9sQDbOMReFI" width="300" height="380">
     <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9sQDbOMReFI" width="300" height="380"></embed>
 </object>
-</center>
+</left>
 ```
 
 - Cali Fire:
 
 ```{=html}
-<center>
+<left>
 <object data="https://open.spotify.com/embed/playlist/3X0Ds1IEYdG1DL0sxCuW6y" width="300" height="380">
     <embed src="https://open.spotify.com/embed/playlist/3X0Ds1IEYdG1DL0sxCuW6y" width="300" height="380"></embed>
 </object>
-</center>
+</left>
 ```
 
 **Southern:** *The South got something to say.*
@@ -84,11 +84,11 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 - I Love My Down South Classics:
 
 ```{=html}
-<center>
+<left>
 <object data="https://open.spotify.com/embed/playlist/37i9dQZF1DWYok9l1JL7GM" width="300" height="380">
     <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DWYok9l1JL7GM" width="300" height="380"></embed>
 </object>
-</center>
+</left>
 ```
 
 Analysis {.storyboard}
