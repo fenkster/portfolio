@@ -427,7 +427,7 @@ fig<-songs_old_data %>%
 ggplotly(fig)
 ```
 ***
-The first thing to point out is that **Loungin** is a lot shorter.
+The first thing to point out is that **Loungin** is a lot shorter. Both songs seem to contain stronger magnitude in the keys of C, C#/D flat as well as A and B.
 
 ### Pitch Analysis Modern
 
