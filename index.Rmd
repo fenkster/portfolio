@@ -50,11 +50,11 @@ My preliminary assumptions can be summarised as follows. East Coast hiphop carri
 - State of Mind:
 
 ```{=html}
-<center>
+<left>
 <object data="https://open.spotify.com/embed/playlist/37i9dQZF1DX1YPTAhwehsC" width="300" height="380">
     <embed src="https://open.spotify.com/embed/playlist/37i9dQZF1DX1YPTAhwehsC" width="300" height="380"></embed>
 </object>
-</center>
+</left>
 ```
 
 **West Coast:** *The best side!*
