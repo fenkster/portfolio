@@ -32,7 +32,7 @@ The **West Coast - East Coast Hip-Hop** rivalry stems from the mid-1990s. This f
 
 The corpus I will be analysing to achieve this consists of four main playlists with an additional one to be used for classification, each containing 50 tracks. The old school Hip-Hop playlists each featuring the two individual styles are named; *I love My West Coast Classics* & *I Love My East Coast Classics*. The contemporary versions of these playlists have two separate sources; *State of Mind* consists of “new school” east-coast songs mainly from New York and has been curated by Spotify. Its contrasting playlist representing the West Coast has been curated by Apple Music with the name *Cali Fire* featuring hits mainly from California. The playlists and visualisations I have used in this project allow me to discover the musicological differences of these styles. I have decided to include an extra playlist called “I Love My Down South Classics” which I will use in the classification exercise to determine whether Southern based Hip-Hop is more similar to East or West Coast rap and if any major influences can be detected. This portfolio aims to provide a comprehensive overview of the similarities and differences present in each of these styles of American Hip-Hop. 
 
-My preliminary assumptions can be summarised as follows. East Coast hiphop carries a more aggressive sound, while West Coast hip-hop is more laid back. East Coast natives include Public Enemy, Notorious BIG, Nas, Rakim, Run DMC and KRS One, all known for thought provoking complex lyricism accented by hard-hitting beats. West Coast Hip-Hop is mainly known for dancing and partying. Noteworthy artists from this side features The Game, Tupac Shakur, Snoop Dogg and Grandmaster Flash. The West coast scene also popularised G-Funk, a fusion between hip-hop and funk music. 
+My preliminary assumptions can be summarised as follows. East Coast hiphop carries a more aggressive sound, while West Coast hip-hop is more laid back. East Coast natives include Public Enemy, Notorious BIG, Nas, Rakim, Run DMC and KRS One, all known for thought provoking complex lyricism accented by hard-hitting beats. West Coast Hip-Hop is mainly known for dancing and partying. Noteworthy artists from this coast are; The Game, Tupac Shakur, Snoop Dogg and Grandmaster Flash. The West coast scene also popularised G-Funk, a fusion between hip-hop and funk music. 
 
 
 **East Coast:** *Where it all started.*
@@ -319,11 +319,11 @@ interactive<-together %>%
 ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5))
 ```
 
-this enables scrolling
+*enables scrolling*
 
 ***
 
-These charts display four important metrics for each playlist in my corpus. We compare valence, energy, loudness and mode in this comprehensive visualization.
+These charts display four important metrics for each playlist in my corpus. We compare valence, energy, loudness and mode in this comprehensive visualization. We can clearly see that the scatter plots of the classical playlists resemble each other much more than the modern ones. The modern playlist tracks plots are more dense than the classical ones, representing less variety and range musically. The tracks of the classical playlists differ more each other. This could be due to the fact that hip-hop was an emerging genre without fixed parameters or guidelines.  We can conclude that time-based differences are easier to identify than coastal styles in this genre. 
 
 
 ### Most average songs
@@ -663,7 +663,7 @@ east_song_key %>%
   ggtitle("Keys")
 ```
 
-this is for scrolling
+*enables scrolling*
 
 ***
 The Chords look fairly similar between coasts. The keys are very different. The East coast song is mainly in minor keys, except for one moment around 90 seconds. The West coast song has more diversity in keys.
@@ -782,7 +782,7 @@ east_new_song_key %>%
   ggtitle("Keys")
 ```
 
-this is for scrolling
+*enables scrolling*
 
 ***
 The Modern songs are more different between coasts.The West coast song has two periods where there's more intensity in both Chords and Keys, while for the East coast song things only happen in the very beginning.
@@ -845,7 +845,7 @@ east_new_song %>%
   ggtitle('East Song')
 ```
 
-this is for scrolling
+*enables scrolling*
 
 ***
 These plots potentially suggest a great feature to differentiate between the old and new songs-tempo novelty in the beginning of the song. Both old songs start with a big drop, while the new songs do not have it. Also, East coast songs seem to change tempo more frequently compared to the West ones.
@@ -951,15 +951,15 @@ rf_classifier
 
 Here a random forest model is estimated. The model was tuned to 1000 samples and the tree depth of 15. This seems to work well as we have quite a few features to choose from at each step (tree depth), but also our training set is relatively small (4x50=200), especially taking into account that we have 4 classes to choose from. Hence, averaging 1000 observations is reasonable. 
 
-Classification error may look high (>30%) at the first glance. However, we are dealing with music and some mistakes are more forgivable than others: although, the algorithm could be better in distinguihing between East and West, it distiguishes very well between time epochs! Classics are almost always classified as Classics, while Modern is almost always Modern.
+Classification error may look high (>30%) at the first glance. However, we are dealing with music and some mistakes are more forgivable than others: although, the algorithm could be better in distinguishing between East and West, it distiguishes very well between time epochs! Classics are almost always classified as Classics, while Modern is almost always Modern.
 
-It is also interesting that precision is significantly higher for some playlists than for others. The confusion matrix suggests that East Coast Modern and West Coast Classics are the most different from the rest of the playlists (classified correctly most often). West Coast Modern is the taughest one to crack - half of the songs are indeed their own genre, but some other 15 songs resemble East Coast Modern, whose features we seem to have identified quite well, and of course some inspiration from West Coast Classics!
+It is also interesting that precision is significantly higher for some playlists than for others. The confusion matrix suggests that East Coast Modern and West Coast Classics are the most different from the rest of the playlists (classified correctly most often). West Coast Modern is the toughest one to crack - half of the songs are indeed their own genre, but some other 15 songs resemble East Coast Modern, whose features we seem to have identified quite well, and of course some inspiration from West Coast Classics!
 
-Fun Fact: West Coast Modern a.k.a. Cali Fire playlist is curated by Apple Music, not Spotify. This may become a strating point in uncovering the differences in algorithms between the two companies.
+Fun Fact: West Coast Modern a.k.a. the "Cali Fire" playlist is curated by Apple Music, not Spotify. This may become a strating point in uncovering the differences in algorithms between the two companies.
 
-All in all, the model seems very reasonable given a not so big training set, 4 classes, and qualitative nature of music itself.
+All in all, the model seems very reasonable given a relatively small training set, 4 classes, and qualitative nature of music itself.
 
-The feature importance graph (next page) shows that tempo, speechiness, instrumentalness and c05 are important in differentiating among playlists. This, on the one hand, is helpful in playlist comparison, but also to suggest which features are the most important to look at when aiming to classify new songs.
+The feature importance graph (next tab) shows that tempo, speechiness, instrumentalness and c05 are important in differentiating among playlists. This, on the one hand, is helpful in playlist comparison, but also to suggest which features are the most important to look at when aiming to classify new songs.
 
 ### Feature importance
 
@@ -1083,20 +1083,20 @@ ggplotly(interactive) %>% layout(legend = list(orientation = "w", x = 1, y = 0.5
 ***
 
 There's a long standing debate about where Southern Rappers drew inspiration from: East or West? Modern or Old School?
-I already looked at South Rap in the mean analysis. Now, as a fun exercise, I will use my random forest model trained on the other 4 playlists to classify the songs from the South playlist. But before that, let's look at the most importnant features in the context of the South.
+I already looked at Southern Rap in the mean analysis. Now, as a fun exercise, I will use my random forest model trained on the other 4 playlists of my corpus to classify the songs from the South playlist. But before that, let's look at the most important features in the context of the South.
 
-From a preliminary glance, I suspect classification to be difficult task. The Speechiness-Tempo (x-y) positions of the songs resemble more the Modern Playlists, with a few very instrumental songs as in the Classics.
+From a preliminary glance, I suspect classification to be a difficult task. The Speechiness-Tempo (x-y) positions of the songs resemble more the Modern playlists, with a few very instrumental songs as in the Classics.
 
-### The moment of truth!
+### The moment of truth! *Predicting the South*
 
 ```{r south_preds}
 predictions <- predict(rf_classifier,test_set)
 south_preds<-data.frame(south$track.name,predictions)
 table(predictions)
 ```
-The moment of truth! The predictions indeed indicate that the South Rap is more similar to Modern styles (mostly East, but that's also our best defined class), with a bit of the West Coast Classic sound mixed in (probably the instrumental ones). Also, we can be pretty confident that South Rap is almost nothing like East Coast Classics.
+The moment of truth! The predictions indeed indicate that the Southern Rap is more similar to Modern styles (mostly East, but that's also our best defined class), with a bit of the West Coast Classic sound mixed in (probably the instrumental ones). Also, we can be pretty confident that Southern Rap is almost nothing like East Coast Classics.
 
-These are some exciting findings for a rap or any music lover, as they scientifically quantify such unquantifiable concepts as influence and inspiration.
+These are some exciting findings for any rap or music lover, as they computationally quantify such unquantifiable concepts as influence and inspiration.
 
 ```{r}
 south<-get_most_average_song(south)[[1]]
@@ -1111,7 +1111,7 @@ P.S. The most average song from *I Love My Down South Classics * is **`r south_s
 </object>
 ```
 
-### Bonus
+### Bonus *Individual track predictions*
 
 ```{r}
 #library(DT)
@@ -1128,9 +1128,9 @@ This analysis has enabled me to compare two styles and two generations of hip-ho
 
 Some key findings:
 
-Old School Hip-Hop is very different from the new one (slower, more instrumentall, less speechy(not sure that's a word))
+Old School Hip-Hop is very different from the newer, more modern songs (slower, more instrumental, less lyrical)
 
-The East Coast-West Coast Rivalry is indeed persistent even in the quantitative view of the music. It is a lot easier for the algorithm to distinguish between old East and West songs and very hard between the modern ones.
+The East Coast-West Coast Rivalry is indeed persistent even in the quantitative view of the music. It is a lot easier for the algorithm to distinguish between old East and West coast songs and very hard for the modern playlists. This could be due to the rise in complexity of music production in Hip-Hop.
 
 The South Rap draws some inspiration from the West Coast Classics, but mainly resembles Modern East Coast.
 
