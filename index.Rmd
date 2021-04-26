@@ -427,7 +427,10 @@ fig<-songs_old_data %>%
 ggplotly(fig)
 ```
 ***
-The first thing to point out is that **Loungin** is a lot shorter. Both songs seem to contain stronger magnitude in the keys of C, C#/D flat as well as A and B.
+The first thing to point out is that **Loungin** (East Coast) is a lot shorter. Its pitch magnitudes lies strongest at A#/Bflat, A, F#/Gflat. **Fuck Tha Police** contains stronger magnitude in the keys of C, C#/D flat as well as A and B.
+
+We can conclude that early hiphop songs are dominant in the keys of A.
+
 
 ### Pitch Analysis Modern
 
@@ -451,7 +454,11 @@ fig<-songs_new_data %>%
 ggplotly(fig)
 ```
 ***
-Here, again, the East Coast song is a lot shorter.
+Here, again, the East Coast song "GET MONEY" is a lot shorter, pitch mangitude is strongest at C#/Dflat, D#/Eflat and G#/Aflat. Paranoia (West coast) reveals very strong mangitude in the keys of C, C#/D flat, E and B
+
+We can conclude that modern hiphop songs of these coasts are dominant in the keys of C, C#/D and B.
+
+Modern hiphop is much more diverse in its pitches, this again can be linked to the advanced productions present in the genre nowadays and can also point to Spotify algorithm being able to detect it better.
 
 ### Chord and Key Comparison of two old school hip-hop songs
 
